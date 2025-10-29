@@ -3,28 +3,34 @@
 </p>
 
 # politraumat
-My own UPV-themed Anki-style flashcards (single HTML file)
+UPV-themed, Anki-style flashcards — single HTML file, runs in your browser.
 
-## What it is (super simple)
-**politraumat** is a tiny flashcard app that runs in your phone or desktop browser. It’s just one HTML file, no server, no install. You load a deck, swipe to grade each card, and your progress is saved automatically in your browser (localStorage).
+## What it is
+- One self-contained HTML file.
+- Mobile-first dark UI with **poli[traumaT]** rainbow logo.
+- Cards live in the page; progress is saved in your browser (localStorage).
 
-## How it works (in plain words)
-- Tap a card to flip between **Front** and **Back**.  
-- Swipe **left = Again**, **down = Hard**, **up = Good**, **right = Easy**.  
-- The next card is shown underneath; animations are smooth and taps don’t trigger long-press weirdness.  
-- A small bar shows **Remaining**, **Done**, and **Mastered**.
+## Why it’s useful
+- No install, no server — open and study anywhere.
+- Fast swipe grading with clear stats (**Remaining / Done / Mastered**).
+- Full backup/restore of your deck **and** progress via JSON export/import.
 
-## Import / Export
-- **Import**: CSV with headers `Front,Back` (new lines allowed inside quotes) **or** JSON.  
-- **Export**: Saves **everything** (deck + your full progress + queue) to a JSON file, so you can back up and restore later.
+## How to use
+- **Open the HTML** in your browser (phone or desktop).
+- **Import a deck**: tap **📥 Importar** and choose:
+  - CSV with headers `Front,Back` (supports quoted newlines), or
+  - JSON (list of `{front, back}` or a saved session).
+- **Study**:
+  - Tap card to flip (**Front / Back**).
+  - Swipe: **← Again**, **↓ Hard**, **↑ Good**, **→ Easy**.
+- **Export progress**: tap **📤 Exportar** to save a JSON snapshot.
+- **Reset**: tap **🗑️** to rebuild the queue and stats from the current deck.
 
-## Settings (bottom sheet ⚙️)
-- Choose where graded cards go (**Again/Hard/Good/Easy positions**).  
-- Set how many correct passes are needed to “master” a card.  
-- Pick the initial order (**Shuffle** or **Original**).  
-- Start showing **Front** or **Back** by default.
+## Settings (⚙️ bottom sheet)
+- Positions for **Again / Hard / Good / Easy** in the queue.
+- Passes required to mark a card **Mastered**.
+- Initial order: **Shuffle** or **Original**.
+- Start on **Front** or **Back**.
 
-## Why it’s nice
-- Mobile-first dark UI with the **poli[traumaT]** rainbow logo.  
-- Single file, fast to share and open.  
-- Your study state persists automatically—close the tab and come back later right where you left off.
+---
+Single file. Smooth gestures. Your state persists automatically.
