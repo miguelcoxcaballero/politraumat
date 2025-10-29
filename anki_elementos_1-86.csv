@@ -1,0 +1,775 @@
+Front,Back
+Hidrógeno,"Símbolo: H
+Número atómico: 1
+Columna (grupo): 1
+Fila (período): 1
+Bloque: s
+Configuración (gas noble anterior): 1s¹
+Valencias comunes: +1, −1
+Tipo: No metal
+Electronegatividad ~2.20"
+Helio,"Símbolo: He
+Número atómico: 2
+Columna (grupo): 18
+Fila (período): 1
+Bloque: s
+Configuración (gas noble anterior): 1s²
+Valencias comunes: 0
+Tipo: Gas noble
+Inerte"
+Litio,"Símbolo: Li
+Número atómico: 3
+Columna (grupo): 1
+Fila (período): 2
+Bloque: s
+Configuración (gas noble anterior): [He] 2s¹
+Valencias comunes: +1
+Tipo: Metal alcalino
+Electronegatividad ~0.98"
+Berilio,"Símbolo: Be
+Número atómico: 4
+Columna (grupo): 2
+Fila (período): 2
+Bloque: s
+Configuración (gas noble anterior): [He] 2s²
+Valencias comunes: +2
+Tipo: Metal alcalinotérreo
+Tóxico en polvo"
+Boro,"Símbolo: B
+Número atómico: 5
+Columna (grupo): 13
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p¹
+Valencias comunes: +3
+Tipo: Metaloide
+Formador de boratos"
+Carbono,"Símbolo: C
+Número atómico: 6
+Columna (grupo): 14
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p²
+Valencias comunes: −4, +2, +4
+Tipo: No metal
+Forma enlaces múltiples"
+Nitrógeno,"Símbolo: N
+Número atómico: 7
+Columna (grupo): 15
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p³
+Valencias comunes: −3, +2, +3, +4, +5
+Tipo: No metal
+N₂ muy estable"
+Oxígeno,"Símbolo: O
+Número atómico: 8
+Columna (grupo): 16
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p⁴
+Valencias comunes: −2 (−1 peróxidos)
+Tipo: No metal
+Agente oxidante"
+Flúor,"Símbolo: F
+Número atómico: 9
+Columna (grupo): 17
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p⁵
+Valencias comunes: −1
+Tipo: Halógeno
+Más electronegativo"
+Neón,"Símbolo: Ne
+Número atómico: 10
+Columna (grupo): 18
+Fila (período): 2
+Bloque: p
+Configuración (gas noble anterior): [He] 2s² 2p⁶
+Valencias comunes: 0
+Tipo: Gas noble
+Inerte"
+Sodio,"Símbolo: Na
+Número atómico: 11
+Columna (grupo): 1
+Fila (período): 3
+Bloque: s
+Configuración (gas noble anterior): [Ne] 3s¹
+Valencias comunes: +1
+Tipo: Metal alcalino
+Muy reactivo en agua"
+Magnesio,"Símbolo: Mg
+Número atómico: 12
+Columna (grupo): 2
+Fila (período): 3
+Bloque: s
+Configuración (gas noble anterior): [Ne] 3s²
+Valencias comunes: +2
+Tipo: Metal alcalinotérreo
+Ligero"
+Aluminio,"Símbolo: Al
+Número atómico: 13
+Columna (grupo): 13
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p¹
+Valencias comunes: +3
+Tipo: Metal p
+Forma alúmina protectora"
+Silicio,"Símbolo: Si
+Número atómico: 14
+Columna (grupo): 14
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p²
+Valencias comunes: −4, +4
+Tipo: Metaloide
+Semiconductor"
+Fósforo,"Símbolo: P
+Número atómico: 15
+Columna (grupo): 15
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p³
+Valencias comunes: −3, +3, +5
+Tipo: No metal
+Alótropos: blanco/rojo"
+Azufre,"Símbolo: S
+Número atómico: 16
+Columna (grupo): 16
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p⁴
+Valencias comunes: −2, +4, +6
+Tipo: No metal
+Olores a tioles"
+Cloro,"Símbolo: Cl
+Número atómico: 17
+Columna (grupo): 17
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p⁵
+Valencias comunes: −1, +1, +3, +5, +7
+Tipo: Halógeno
+Agente oxidante"
+Argón,"Símbolo: Ar
+Número atómico: 18
+Columna (grupo): 18
+Fila (período): 3
+Bloque: p
+Configuración (gas noble anterior): [Ne] 3s² 3p⁶
+Valencias comunes: 0
+Tipo: Gas noble
+Inerte"
+Potasio,"Símbolo: K
+Número atómico: 19
+Columna (grupo): 1
+Fila (período): 4
+Bloque: s
+Configuración (gas noble anterior): [Ar] 4s¹
+Valencias comunes: +1
+Tipo: Metal alcalino
+Muy reactivo"
+Calcio,"Símbolo: Ca
+Número atómico: 20
+Columna (grupo): 2
+Fila (período): 4
+Bloque: s
+Configuración (gas noble anterior): [Ar] 4s²
+Valencias comunes: +2
+Tipo: Metal alcalinotérreo
+Huesos y minerales"
+Escandio,"Símbolo: Sc
+Número atómico: 21
+Columna (grupo): 3
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d¹ 4s²
+Valencias comunes: +3
+Tipo: Metal de transición
+Similar a lantánidos"
+Titanio,"Símbolo: Ti
+Número atómico: 22
+Columna (grupo): 4
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d² 4s²
+Valencias comunes: +3, +4
+Tipo: Metal de transición
+Alta resistencia"
+Vanadio,"Símbolo: V
+Número atómico: 23
+Columna (grupo): 5
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d³ 4s²
+Valencias comunes: +2, +3, +4, +5
+Tipo: Metal de transición
+Catalizador"
+Cromo,"Símbolo: Cr
+Número atómico: 24
+Columna (grupo): 6
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d⁵ 4s¹
+Valencias comunes: +2, +3, +6
+Tipo: Metal de transición
+Acero inoxidable"
+Manganeso,"Símbolo: Mn
+Número atómico: 25
+Columna (grupo): 7
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d⁵ 4s²
+Valencias comunes: +2, +3, +4, +6, +7
+Tipo: Metal de transición
+Permanganato KMnO₄"
+Hierro,"Símbolo: Fe
+Número atómico: 26
+Columna (grupo): 8
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d⁶ 4s²
+Valencias comunes: +2, +3
+Tipo: Metal de transición
+Hemoglobina"
+Cobalto,"Símbolo: Co
+Número atómico: 27
+Columna (grupo): 9
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d⁷ 4s²
+Valencias comunes: +2, +3
+Tipo: Metal de transición
+Imanes"
+Níquel,"Símbolo: Ni
+Número atómico: 28
+Columna (grupo): 10
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d⁸ 4s²
+Valencias comunes: +2, +3
+Tipo: Metal de transición
+Alicación/monedas"
+Cobre,"Símbolo: Cu
+Número atómico: 29
+Columna (grupo): 11
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s¹
+Valencias comunes: +1, +2
+Tipo: Metal de transición
+Conductividad alta"
+Zinc,"Símbolo: Zn
+Número atómico: 30
+Columna (grupo): 12
+Fila (período): 4
+Bloque: d
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s²
+Valencias comunes: +2
+Tipo: Metal de transición
+Galvanizado"
+Galio,"Símbolo: Ga
+Número atómico: 31
+Columna (grupo): 13
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p¹
+Valencias comunes: +3
+Tipo: Metal p
+Funde en mano (~30°C)"
+Germanio,"Símbolo: Ge
+Número atómico: 32
+Columna (grupo): 14
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p²
+Valencias comunes: +2, +4
+Tipo: Metaloide
+Semiconductor"
+Arsénico,"Símbolo: As
+Número atómico: 33
+Columna (grupo): 15
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p³
+Valencias comunes: −3, +3, +5
+Tipo: Metaloide
+Tóxico"
+Selenio,"Símbolo: Se
+Número atómico: 34
+Columna (grupo): 16
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p⁴
+Valencias comunes: −2, +4, +6
+Tipo: No metal
+Fotoconductor"
+Bromo,"Símbolo: Br
+Número atómico: 35
+Columna (grupo): 17
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p⁵
+Valencias comunes: −1, +1, +3, +5, +7
+Tipo: Halógeno
+Líquido a Tª amb."
+Kriptón,"Símbolo: Kr
+Número atómico: 36
+Columna (grupo): 18
+Fila (período): 4
+Bloque: p
+Configuración (gas noble anterior): [Ar] 3d¹⁰ 4s² 4p⁶
+Valencias comunes: 0 (raro +2)
+Tipo: Gas noble
+Inerte, luces"
+Rubidio,"Símbolo: Rb
+Número atómico: 37
+Columna (grupo): 1
+Fila (período): 5
+Bloque: s
+Configuración (gas noble anterior): [Kr] 5s¹
+Valencias comunes: +1
+Tipo: Metal alcalino
+Muy reactivo"
+Estroncio,"Símbolo: Sr
+Número atómico: 38
+Columna (grupo): 2
+Fila (período): 5
+Bloque: s
+Configuración (gas noble anterior): [Kr] 5s²
+Valencias comunes: +2
+Tipo: Metal alcalinotérreo
+Color rojo en fuegos artificiales"
+Itrio,"Símbolo: Y
+Número atómico: 39
+Columna (grupo): 3
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d¹ 5s²
+Valencias comunes: +3
+Tipo: Metal de transición
+Usado en LEDs rojos"
+Zirconio,"Símbolo: Zr
+Número atómico: 40
+Columna (grupo): 4
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d² 5s²
+Valencias comunes: +4
+Tipo: Metal de transición
+Resistente a la corrosión"
+Niobio,"Símbolo: Nb
+Número atómico: 41
+Columna (grupo): 5
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d⁴ 5s¹
+Valencias comunes: +3,+5
+Tipo: Metal de transición
+Superconductores"
+Molibdeno,"Símbolo: Mo
+Número atómico: 42
+Columna (grupo): 6
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d⁵ 5s¹
+Valencias comunes: +2,+3,+4,+6
+Tipo: Metal de transición
+Enzimas y aceros"
+Tecnecio,"Símbolo: Tc
+Número atómico: 43
+Columna (grupo): 7
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d⁵ 5s²
+Valencias comunes: +4,+6,+7
+Tipo: Metal radiactivo
+Usado en medicina nuclear"
+Rutenio,"Símbolo: Ru
+Número atómico: 44
+Columna (grupo): 8
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d⁷ 5s¹
+Valencias comunes: +2,+3,+4,+6,+8
+Tipo: Metal de transición
+Catalizador"
+Rodio,"Símbolo: Rh
+Número atómico: 45
+Columna (grupo): 9
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d⁸ 5s¹
+Valencias comunes: +1,+2,+3
+Tipo: Metal de transición
+Catalizador automotriz"
+Paladio,"Símbolo: Pd
+Número atómico: 46
+Columna (grupo): 10
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d¹⁰
+Valencias comunes: +2,+4
+Tipo: Metal de transición
+Catalizador, joyería"
+Plata,"Símbolo: Ag
+Número atómico: 47
+Columna (grupo): 11
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s¹
+Valencias comunes: +1
+Tipo: Metal de transición
+Alta conductividad eléctrica"
+Cadmio,"Símbolo: Cd
+Número atómico: 48
+Columna (grupo): 12
+Fila (período): 5
+Bloque: d
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s²
+Valencias comunes: +2
+Tipo: Metal de transición
+Tóxico, usado en baterías"
+Indio,"Símbolo: In
+Número atómico: 49
+Columna (grupo): 13
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p¹
+Valencias comunes: +1,+3
+Tipo: Metal p
+Pantallas LCD"
+Estaño,"Símbolo: Sn
+Número atómico: 50
+Columna (grupo): 14
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p²
+Valencias comunes: +2,+4
+Tipo: Metal p
+Aleaciones (bronce)"
+Antimonio,"Símbolo: Sb
+Número atómico: 51
+Columna (grupo): 15
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p³
+Valencias comunes: −3,+3,+5
+Tipo: Metaloide
+Ignífugo"
+Telurio,"Símbolo: Te
+Número atómico: 52
+Columna (grupo): 16
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p⁴
+Valencias comunes: −2,+4,+6
+Tipo: Metaloide
+Semiconductores"
+Yodo,"Símbolo: I
+Número atómico: 53
+Columna (grupo): 17
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p⁵
+Valencias comunes: −1,+1,+3,+5,+7
+Tipo: Halógeno
+Necesario en tiroides"
+Xenón,"Símbolo: Xe
+Número atómico: 54
+Columna (grupo): 18
+Fila (período): 5
+Bloque: p
+Configuración (gas noble anterior): [Kr] 4d¹⁰ 5s² 5p⁶
+Valencias comunes: 0,+2,+4,+6
+Tipo: Gas noble
+Lámparas de flash"
+Cesio,"Símbolo: Cs
+Número atómico: 55
+Columna (grupo): 1
+Fila (período): 6
+Bloque: s
+Configuración (gas noble anterior): [Xe] 6s¹
+Valencias comunes: +1
+Tipo: Metal alcalino
+Muy reactivo, funde a 28 °C"
+Bario,"Símbolo: Ba
+Número atómico: 56
+Columna (grupo): 2
+Fila (período): 6
+Bloque: s
+Configuración (gas noble anterior): [Xe] 6s²
+Valencias comunes: +2
+Tipo: Metal alcalinotérreo
+Contrastes radiográficos"
+Lantano,"Símbolo: La
+Número atómico: 57
+Columna (grupo): 3
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 5d¹ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Vidrios ópticos"
+Cerio,"Símbolo: Ce
+Número atómico: 58
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹ 5d¹ 6s²
+Valencias comunes: +3,+4
+Tipo: Lantánido
+Pulido de lentes"
+Praseodimio,"Símbolo: Pr
+Número atómico: 59
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f³ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Imanes de alta fuerza"
+Neodimio,"Símbolo: Nd
+Número atómico: 60
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁴ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Imanes de neodimio"
+Prometio,"Símbolo: Pm
+Número atómico: 61
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁵ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Radiactivo, raro"
+Samario,"Símbolo: Sm
+Número atómico: 62
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁶ 6s²
+Valencias comunes: +2,+3
+Tipo: Lantánido
+Imanes y reactores"
+Europio,"Símbolo: Eu
+Número atómico: 63
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁷ 6s²
+Valencias comunes: +2,+3
+Tipo: Lantánido
+Pantallas rojas CRT"
+Gadolinio,"Símbolo: Gd
+Número atómico: 64
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁷ 5d¹ 6s²
+Valencias comunes: +2,+3
+Tipo: Lantánido
+Resonancia magnética"
+Terbio,"Símbolo: Tb
+Número atómico: 65
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f⁹ 6s²
+Valencias comunes: +3,+4
+Tipo: Lantánido
+Fósforos verdes"
+Disprosio,"Símbolo: Dy
+Número atómico: 66
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹⁰ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Imanes y láseres"
+Holmio,"Símbolo: Ho
+Número atómico: 67
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹¹ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Campo magnético alto"
+Erbio,"Símbolo: Er
+Número atómico: 68
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹² 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Fibra óptica"
+Tulio,"Símbolo: Tm
+Número atómico: 69
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹³ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Láseres médicos"
+Iterbio,"Símbolo: Yb
+Número atómico: 70
+Columna (grupo): 3
+Fila (período): 6
+Bloque: f
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 6s²
+Valencias comunes: +2,+3
+Tipo: Lantánido
+Láseres infrarrojos"
+Lutecio,"Símbolo: Lu
+Número atómico: 71
+Columna (grupo): 3
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹ 6s²
+Valencias comunes: +3
+Tipo: Lantánido
+Catalizador refinado"
+Hafnio,"Símbolo: Hf
+Número atómico: 72
+Columna (grupo): 4
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d² 6s²
+Valencias comunes: +4
+Tipo: Metal de transición
+Control nuclear"
+Tantalio,"Símbolo: Ta
+Número atómico: 73
+Columna (grupo): 5
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d³ 6s²
+Valencias comunes: +5
+Tipo: Metal de transición
+Implantes médicos"
+Wolframio,"Símbolo: W
+Número atómico: 74
+Columna (grupo): 6
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d⁴ 6s²
+Valencias comunes: +2,+4,+6
+Tipo: Metal de transición
+Filamentos, duro"
+Renio,"Símbolo: Re
+Número atómico: 75
+Columna (grupo): 7
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d⁵ 6s²
+Valencias comunes: +4,+6,+7
+Tipo: Metal de transición
+Aleaciones resistentes"
+Osmio,"Símbolo: Os
+Número atómico: 76
+Columna (grupo): 8
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d⁶ 6s²
+Valencias comunes: +4,+6,+8
+Tipo: Metal de transición
+Muy denso"
+Iridio,"Símbolo: Ir
+Número atómico: 77
+Columna (grupo): 9
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d⁷ 6s²
+Valencias comunes: +3,+4
+Tipo: Metal de transición
+Resistente a la corrosión"
+Platino,"Símbolo: Pt
+Número atómico: 78
+Columna (grupo): 10
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d⁹ 6s¹
+Valencias comunes: +2,+4
+Tipo: Metal de transición
+Catalizador, joyería"
+Oro,"Símbolo: Au
+Número atómico: 79
+Columna (grupo): 11
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s¹
+Valencias comunes: +1,+3
+Tipo: Metal de transición
+Inerte, conductor"
+Mercurio,"Símbolo: Hg
+Número atómico: 80
+Columna (grupo): 12
+Fila (período): 6
+Bloque: d
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s²
+Valencias comunes: +1,+2
+Tipo: Metal de transición
+Líquido, tóxico"
+Talio,"Símbolo: Tl
+Número atómico: 81
+Columna (grupo): 13
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p¹
+Valencias comunes: +1,+3
+Tipo: Metal p
+Tóxico"
+Plomo,"Símbolo: Pb
+Número atómico: 82
+Columna (grupo): 14
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p²
+Valencias comunes: +2,+4
+Tipo: Metal p
+Denso, tóxico"
+Bismuto,"Símbolo: Bi
+Número atómico: 83
+Columna (grupo): 15
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p³
+Valencias comunes: +3,+5
+Tipo: Metal p
+Menos tóxico que Pb"
+Polonio,"Símbolo: Po
+Número atómico: 84
+Columna (grupo): 16
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴
+Valencias comunes: −2,+4,+6
+Tipo: Metal radiactivo
+Descubierto por Curie"
+Astato,"Símbolo: At
+Número atómico: 85
+Columna (grupo): 17
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵
+Valencias comunes: −1,+1,+3,+5,+7
+Tipo: Halógeno radiactivo
+Muy raro"
+Radón,"Símbolo: Rn
+Número atómico: 86
+Columna (grupo): 18
+Fila (período): 6
+Bloque: p
+Configuración (gas noble anterior): [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶
+Valencias comunes: 0
+Tipo: Gas noble radiactivo
+Producto del uranio"
