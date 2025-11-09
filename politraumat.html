@@ -307,7 +307,7 @@
   .exit-left { transform: translateX(-130%) rotate(-6deg); opacity:0 }
   .exit-right{ transform: translateX(130%) rotate( 6deg); opacity:0 }
   .exit-up   { transform: translateY(-130%) rotate(-3deg); opacity:0 }
-  .exit-down { transform: translateY(130%) rotate( 3deg); opacity:0 }
+  .exit-down { transform: translateY(130%) rotate(3deg); opacity:0 }
   .notrans   { transition:none !important }
   .noanim    { animation:none !important }
 
@@ -399,7 +399,7 @@
     color:#9cb2c9;
   }
 
-  /* Botones y campos dentro de ajustes más grandes y anchos */
+  /* Botones/campos en ajustes más grandes y anchos */
   .sheet-panel .btn{
     max-width:none;
     width:100%;
@@ -411,6 +411,18 @@
   }
   .sheet-panel input.btn{
     text-align:left;
+  }
+
+  /* EXCEPCIÓN: la X debe ser cuadrada arriba derecha */
+  #closeSettingsBtn{
+    width:auto !important;
+    max-width:none !important;
+    padding:.25rem .25rem !important;
+    height:32px !important;
+    aspect-ratio:1/1;
+    border-radius:8px;
+    font-size:16px !important;
+    flex:0 0 auto;
   }
 
   textarea{
@@ -570,7 +582,6 @@
   <!-- MODO COMPLETA -->
   <div id="modeCompleteControls" style="display:none">
     <div class="rowCenter" id="completeButtonsContainer">
-      <!-- dinámico: comprobar / siguiente / again-hard-good -->
       <button class="tbtn good wide" id="checkBtn" aria-label="Comprobar">Comprobar</button>
     </div>
     <div class="tiny" id="completeHint">Escribe tu respuesta y pulsa “Comprobar”.</div>
@@ -966,7 +977,6 @@ function renderStack(){
   const belowArt = document.getElementById('cardBelow');
 
   if(app.cfg.mode === 'completa'){
-    // Nueva carta -> estado idle, botón comprobar ancho
     app.completeState = 'idle';
     showCheckButton();
 
@@ -1007,7 +1017,6 @@ function renderStack(){
     if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”.';
 
   } else {
-    // Modo cartas clásico
     fillCard('Top', card, entry.showBack);
     const nextEntry = (app.freezeBelow && app.peekNextEntry) ? app.peekNextEntry : queueNextEntry();
     const nextCard  = nextEntry ? cardById(nextEntry.id) : null;
@@ -1335,18 +1344,15 @@ function handleCheck(){
   const expectedRaw = entry.showBack ? (card.front || '') : (card.back || '');
   const expected = normalizeAnswer(expectedRaw);
 
-  // Mostrar solución siempre
   solutionArea.textContent = 'Solución: ' + expectedRaw;
 
   if(user && expected && user === expected){
-    // Correcto: perímetro azul, botón Siguiente
     app.completeState = 'checked-correct';
     setCardResultClass('easy');
     showNextButton();
   }else{
-    // Incorrecto: perímetro rojo ya al comprobar, mostrar Again/Hard/Good
     app.completeState = 'checked-wrong';
-    setCardResultClass('again');
+    setCardResultClass('again'); // rojo al fallar
     showGradeButtons();
   }
 }
