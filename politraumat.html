@@ -37,22 +37,24 @@
     height:var(--topbar-h);
     display:flex;
     align-items:center;
-    gap:.45rem;
-    padding:0 .6rem;
+    gap:.35rem;
+    padding:0 .45rem;
     background:rgba(11,15,20,.9);
     backdrop-filter: blur(8px);
     border-bottom:1px solid #162234;
     overflow:hidden;
+    flex-wrap:nowrap;
   }
   .brand{
     display:flex;
     align-items:center;
-    gap:.25rem;
+    gap:.18rem;
     font-weight:700;
     font-size:var(--head-fs);
     white-space:nowrap;
+    flex:0 0 auto;
   }
-  .brand-poli{color:#fff; letter-spacing:.2px}
+  .brand-poli{color:#fff; letter-spacing:.1px}
   .brand-trauma{
     font-weight:800;
     background: linear-gradient(90deg,#ff0040,#ff7a00,#ffd400,#00d17a,#0096ff,#9b5cff,#ff3cd1);
@@ -62,7 +64,7 @@
     background-clip:text;
     -webkit-text-fill-color: transparent;
     color:transparent;
-    letter-spacing:.2px;
+    letter-spacing:.15px;
     animation: rainbowSlide 6s linear infinite;
   }
   @keyframes rainbowSlide{
@@ -70,30 +72,53 @@
     100%{background-position:200% 50%}
   }
 
-  .spacer{flex:1}
+  .spacer{flex:1 1 auto; min-width:0}
   input[type=file]{display:none}
   .btn{
     border:1px solid #2a3a4f;
     background:var(--btn);
     color:var(--ink);
-    padding:.35rem .6rem;
+    padding:.32rem .5rem;
     border-radius:10px;
     cursor:pointer;
     transition:background .15s, transform .06s;
-    font-size: clamp(12px, 2.8vw, 14px);
+    font-size: clamp(11px, 2.6vw, 13px);
     line-height:1;
     white-space:nowrap;
     flex:0 0 auto;
+    max-width:64px;
+    text-overflow:ellipsis;
+    overflow:hidden;
   }
   header.topbar .btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    height:34px;
+    height:30px;
   }
   .btn:hover{background:var(--btnHover)}
   .btn:active{transform:translateY(1px)}
   .btn.danger{border-color:#5b1a1a}
+
+  /* Aún más compacto en pantallas muy estrechas */
+  @media (max-width:480px){
+    header.topbar{
+      gap:.25rem;
+      padding:0 .35rem;
+    }
+    .brand{
+      font-size:12px;
+      max-width:82px;
+      text-overflow:ellipsis;
+      overflow:hidden;
+    }
+    header.topbar .btn{
+      padding:.22rem .35rem;
+      font-size:10px;
+      max-width:52px;
+      height:26px;
+    }
+  }
 
   .statsbar{
     height:var(--statsbar-h);
@@ -114,8 +139,8 @@
     border-radius:999px;
     color:#9cb2c9;
     white-space:nowrap;
-    overflow:visible;
-    text-overflow:clip;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
 
   main{
@@ -140,6 +165,7 @@
     text-align:center;
     padding:1rem;
     width:100%;
+    font-size:.9rem;
   }
 
   .stack{
@@ -232,7 +258,7 @@
   .exit-left { transform: translateX(-130%) rotate(-6deg); opacity:0 }
   .exit-right{ transform: translateX(130%)  rotate( 6deg); opacity:0 }
   .exit-up   { transform: translateY(-130%) rotate(-3deg); opacity:0 }
-  .exit-down { transform: translateY(130%)  rotate( 3deg); opacity:0 }
+  .exit-down { transform: translateY(130%) rotate( 3deg); opacity:0 }
   .notrans   { transition:none !important }
   .noanim    { animation:none !important }
 
@@ -322,10 +348,10 @@
   </div>
   <div class="spacer"></div>
   <input type="file" id="file" accept=".csv,.json,text/csv,application/json" />
-  <label for="file" class="btn" title="Importar CSV/JSON">📥 Importar</label>
-  <button class="btn" id="exportBtn" title="Exportar JSON (baraja + progreso)">📤 Exportar</button>
-  <button class="btn" id="resetBtn" title="Resetear sólo el progreso">🔙</button>
-  <button class="btn danger" id="wipeAllBtn" title="Borrar TODO (cartas + progreso)">🗑️</button>
+  <label for="file" class="btn" title="Importar CSV/JSON">📥</label>
+  <button class="btn" id="exportBtn" title="Exportar JSON">📤</button>
+  <button class="btn" id="resetBtn" title="Resetear progreso">🔙</button>
+  <button class="btn danger" id="wipeAllBtn" title="Borrar TODO">🗑️</button>
   <button class="btn" id="openSettingsBtn" title="Ajustes">⚙️</button>
 </header>
 
@@ -351,9 +377,9 @@
       </article>
     </div>
     <div class="dropzone" id="dzHelp">
-      <b>Usa “📥 Importar” para cargar tu baraja (CSV o JSON).</b>
-      <div>CSV con o sin cabecera Front,Back. Si no hay cabecera, la 1ª columna será Frente y la 2ª Reverso.</div>
-      <div>Elige el separador y el modo de “adivinar” en Ajustes antes de importar si quieres.</div>
+      <b>Usa “📥” para cargar tu baraja (CSV o JSON).</b>
+      <div>Si no hay cabecera Front,Back, se usa 1ª columna como Frente y 2ª como Reverso.</div>
+      <div>Elige el separador y el modo de “adivinar” en Ajustes.</div>
     </div>
   </section>
 
@@ -366,7 +392,7 @@
 
     <div class="grid2">
       <label>Again +<input id="againPos" type="number" inputmode="numeric" value="2" min="1" class="btn" style="width:100%"></label>
-      <label>Hard +<input  id="hardPos"  type="number" inputmode="numeric" value="5" min="2" class="btn" style="width:100%"></label>
+      <label>Hard +<input  id="hardPos"  type="number" inputmode="numeric" value="5" min="1" class="btn" style="width:100%"></label>
       <label>Good →<input  id="goodPos"  type="text"   value="10" class="btn" style="width:100%"></label>
       <label>Easy →<input  id="easyPos"  type="text"   value="end" class="btn" style="width:100%"></label>
       <label>Aciertos para dominar
@@ -385,8 +411,7 @@
     <h3 style="margin:0 0 .4rem">Modo de adivinanza</h3>
     <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin-bottom:.4rem">
       <span>Adivinar:</span>
-      <select id="guessSelect" class="btn" style="padding:.25rem .5rem">
-        <!-- valores internos: 'back' = adivinar reverso (muestra frente), 'front' = adivinar frente (muestra reverso), 'both' = ambos lados -->
+      <select id="guessSelect" class="btn" style="padding:.25rem .5rem; max-width:none">
         <option value="back">reverso</option>
         <option value="front">frente</option>
         <option value="both">ambos</option>
@@ -399,7 +424,7 @@
     <h3 style="margin:.4rem 0 .4rem">Separador y pegado</h3>
     <div style="display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-bottom:.4rem">
       <span>Separador CSV:</span>
-      <select id="sepSelect" class="btn" style="padding:.25rem .5rem">
+      <select id="sepSelect" class="btn" style="padding:.25rem .5rem; max-width:none">
         <option value=",">,</option>
         <option value=";">;</option>
         <option value=":">:</option>
@@ -431,7 +456,6 @@
 </nav>
 
 <script>
-/* ========= Utilidades ========= */
 const uid = ()=> Math.random().toString(36).slice(2)+Date.now().toString(36);
 
 function parseCSV(text, sep){
@@ -461,7 +485,6 @@ function parseCSV(text, sep){
   while(rows.length && rows[rows.length-1].every(x => (x||'').trim()==='')) rows.pop();
   return rows;
 }
-
 function shuffle(arr){
   for(let i=arr.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
@@ -471,7 +494,6 @@ function shuffle(arr){
 }
 const clamp=(v,min,max)=> Math.max(min, Math.min(max, v));
 
-/* ========= DOM ========= */
 const remStat        = document.getElementById('remStat');
 const doneStat       = document.getElementById('doneStat');
 const masteredStat   = document.getElementById('masteredStat');
@@ -505,19 +527,17 @@ const wipeAllBtn    = document.getElementById('wipeAllBtn');
 
 const bodyEl        = document.body;
 
-/* ========= Helpers ========= */
 function getSelectedSep(){
   return (sepSelect && sepSelect.value) ? sepSelect.value : ',';
 }
 
-/* ========= Estado ========= */
+/* ===== Estado ===== */
 const STORAGE_KEY='ankiCram.mobile.v15.progress';
 let app={
   version: 3,
   deckName:'Sin baraja',
   cards:[],
-  // queue: array de {id, showBack}
-  queue:[],
+  queue:[], // [{id, showBack}]
   stats:{done:0, mastered:0},
   cfg:{
     againPos:2,
@@ -526,7 +546,7 @@ let app={
     easyPos:'end',
     passesNeeded:1,
     order:'shuffle',
-    guessMode:'back' // 'back' (adivinar reverso), 'front' (adivinar frente), 'both'
+    guessMode:'back'
   },
   meta:{},
   peekNextEntry:null,
@@ -534,26 +554,23 @@ let app={
   animating:false
 };
 
-/* ========= Queue helpers ========= */
-function makeEntryForId(id, cfg){
-  if(cfg.guessMode === 'front') return {id, showBack:true};
-  if(cfg.guessMode === 'back')  return {id, showBack:false};
-  // 'both' se maneja aparte; por defecto mostramos frente (para adivinar reverso)
-  return {id, showBack:false};
-}
-
-function currentEntry(){ return app.queue[0] || null; }
-function queueNextEntry(){ return app.queue[1] || null; }
-
 function cardById(id){
   return app.cards.find(c=>c.id===id) || null;
 }
+function currentEntry(){ return app.queue[0] || null; }
+function queueNextEntry(){ return app.queue[1] || null; }
 function currentCard(){
   const e = currentEntry();
   return e ? cardById(e.id) : null;
 }
 
-/* ========= Persistencia & migración ========= */
+/* ===== Migración / Persistencia ===== */
+function makeEntryForId(id, cfg){
+  if(cfg.guessMode === 'front') return {id, showBack:true};
+  if(cfg.guessMode === 'back')  return {id, showBack:false};
+  return {id, showBack:false};
+}
+
 function sanitizeQueue(raw, cfg, cards){
   const validIds = new Set(cards.map(c=>c.id));
   const out=[];
@@ -574,16 +591,15 @@ function sanitizeQueue(raw, cfg, cards){
     }
   }
 
-  // Si venimos de una versión sin info o quedó vacío, reconstruimos completo
   if(!out.length){
     if(cfg.guessMode === 'both'){
       for(const c of cards){
         out.push({id:c.id, showBack:false});
         out.push({id:c.id, showBack:true});
       }
-    } else if(cfg.guessMode === 'front'){
+    }else if(cfg.guessMode === 'front'){
       for(const c of cards) out.push({id:c.id, showBack:true});
-    } else {
+    }else{
       for(const c of cards) out.push({id:c.id, showBack:false});
     }
   }
@@ -604,7 +620,6 @@ function migrateAndSanitize(obj){
 
   out.cfg = {...app.cfg, ...(out.cfg||{})};
 
-  // Inferir guessMode si no existe (desde showStart antiguo si estuviera)
   if(!out.cfg.guessMode){
     if(out.cfg.showStart === 'back') out.cfg.guessMode = 'front';
     else out.cfg.guessMode = 'back';
@@ -620,7 +635,7 @@ function migrateAndSanitize(obj){
   for(const c of out.cards){
     const m=(out.meta||{})[c.id]||{};
     const streak = m.streak|0;
-    meta[c.id] = {
+    meta[c.id]={
       seen: m.seen|0,
       streak,
       correct: m.correct|0,
@@ -636,9 +651,9 @@ function migrateAndSanitize(obj){
     mastered: out.stats?.mastered|0
   };
 
-  out.peekNextEntry = null;
-  out.freezeBelow = false;
-  out.animating = false;
+  out.peekNextEntry=null;
+  out.freezeBelow=false;
+  out.animating=false;
 
   return out;
 }
@@ -662,7 +677,7 @@ function loadSession(){
   }
 }
 
-/* ========= Construcción de cola según ajustes ========= */
+/* ===== Cola según ajustes ===== */
 function buildQueue(){
   const mode = app.cfg.guessMode || 'back';
   const q = [];
@@ -678,16 +693,13 @@ function buildQueue(){
   }
 
   if(mode === 'both'){
-    // Cada carta aparece dos veces: una mostrando frente (adivinar reverso) y otra mostrando reverso (adivinar frente)
     for(const c of app.cards){
       q.push({id:c.id, showBack:false});
       q.push({id:c.id, showBack:true});
     }
-  } else if(mode === 'front'){
-    // Adivinar frente => mostramos reverso
+  }else if(mode === 'front'){
     for(const c of app.cards) q.push({id:c.id, showBack:true});
-  } else { // 'back'
-    // Adivinar reverso => mostramos frente
+  }else{
     for(const c of app.cards) q.push({id:c.id, showBack:false});
   }
 
@@ -696,12 +708,7 @@ function buildQueue(){
   app.queue = q;
   app.meta = {};
   for(const c of app.cards){
-    app.meta[c.id] = {
-      seen:0,
-      streak:0,
-      correct:0,
-      remaining:app.cfg.passesNeeded
-    };
+    app.meta[c.id]={seen:0, streak:0, correct:0, remaining:app.cfg.passesNeeded};
   }
   app.stats = {done:0, mastered:0};
   app.peekNextEntry = null;
@@ -709,7 +716,7 @@ function buildQueue(){
   app.animating = false;
 }
 
-/* ========= Render ========= */
+/* ===== Render ===== */
 function renderStats(){
   remStat.textContent = String(app.queue.length);
   doneStat.textContent = String(app.stats.done||0);
@@ -728,10 +735,8 @@ function fillCard(prefix, cardObj, showBack){
     return;
   }
   art.style.display='flex';
-
   const isBack = !!showBack;
   const label = isBack ? 'Reverso' : 'Frente';
-
   badge.textContent = label;
   title.textContent = label;
   face.textContent  = isBack ? (cardObj.back || '') : (cardObj.front || '');
@@ -750,16 +755,13 @@ function renderStack(){
     help.style.display='block';
     return;
   }
-
   help.style.display='none';
   stack.style.display='block';
 
   clearHint();
 
-  // Carta superior (actual)
   fillCard('Top', card, entry.showBack);
 
-  // Carta inferior (siguiente)
   let nextEntry = (app.freezeBelow && app.peekNextEntry) ? app.peekNextEntry : queueNextEntry();
   if(nextEntry && !cardById(nextEntry.id)) nextEntry = null;
   const nextCard = nextEntry ? cardById(nextEntry.id) : null;
@@ -771,11 +773,11 @@ function renderAll(){
   renderStack();
 }
 
-/* ========= Hint ========= */
-const hint = ()=> document.getElementById('swHint');
+/* ===== Hint ===== */
+const hintEl = ()=> document.getElementById('swHint');
 
 function setHintDirOpacity(dir, opa){
-  const h = hint();
+  const h = hintEl();
   h.classList.remove('flash');
   h.classList.add('noanim');
   h.className = 'swipe-hint ' + (
@@ -787,7 +789,7 @@ function setHintDirOpacity(dir, opa){
   h.style.opacity = String(clamp(opa,0,1));
 }
 function clearHint(){
-  const h = hint();
+  const h = hintEl();
   h.classList.add('noanim');
   h.classList.remove('flash','hint-left','hint-right','hint-up','hint-down');
   h.className = 'swipe-hint';
@@ -796,7 +798,7 @@ function clearHint(){
   h.classList.remove('noanim');
 }
 function flashHintFinal(dir){
-  const h = hint();
+  const h = hintEl();
   h.classList.remove('noanim','flash');
   h.className = 'swipe-hint ' + (
     dir==='left'  ? 'hint-left' :
@@ -809,7 +811,7 @@ function flashHintFinal(dir){
   setTimeout(clearHint, 520);
 }
 
-/* ========= Movimiento en cola ========= */
+/* ===== Cola movimiento ===== */
 function moveCurrent(delta){
   if(app.queue.length <= 1) return;
   const entry = app.queue.shift();
@@ -820,45 +822,43 @@ function moveCurrent(delta){
     app.queue.splice(pos, 0, entry);
   }
 }
-
 function removeCurrentAsMastered(){
   app.queue.shift();
   app.stats.mastered += 1;
 }
 
-/* ========= Nota / calificación ========= */
+/* ===== Grading ===== */
 function performGrade(action){
   const entry = currentEntry();
   const card = currentCard();
   if(!entry || !card) return;
-
   const id = entry.id;
+
   const m = app.meta[id] || (app.meta[id] = {
     seen:0, streak:0, correct:0, remaining:app.cfg.passesNeeded
   });
-
   m.seen += 1;
 
   if(action==='again'){
-    m.streak = 0;
-    app.stats.done += 1;
+    m.streak=0;
+    app.stats.done+=1;
     moveCurrent(app.cfg.againPos);
   } else if(action==='hard'){
-    m.streak = Math.max(0, m.streak-1);
-    app.stats.done += 1;
+    m.streak=Math.max(0, m.streak-1);
+    app.stats.done+=1;
     moveCurrent(app.cfg.hardPos);
   } else if(action==='good'){
-    m.streak += 1;
-    m.correct += 1;
+    m.streak+=1;
+    m.correct+=1;
     m.remaining = Math.max(1, app.cfg.passesNeeded - m.streak);
-    app.stats.done += 1;
+    app.stats.done+=1;
     moveCurrent(app.cfg.goodPos);
   } else if(action==='easy'){
-    m.streak += 2;
-    m.correct += 1;
+    m.streak+=2;
+    m.correct+=1;
     m.remaining = Math.max(0, app.cfg.passesNeeded - m.streak);
-    if(m.remaining === 0){
-      app.stats.done += 1;
+    if(m.remaining===0){
+      app.stats.done+=1;
       removeCurrentAsMastered();
     }else{
       moveCurrent(app.cfg.easyPos);
@@ -866,7 +866,7 @@ function performGrade(action){
   }
 }
 
-/* ========= Animaciones ========= */
+/* ===== Animaciones ===== */
 function applyExit(action, dragState, done){
   const el = document.getElementById('cardTop');
   const {dx=0, dy=0} = dragState || {};
@@ -882,18 +882,17 @@ function applyExit(action, dragState, done){
   else if(action==='good') endTransform = 'translateY(-130%) rotate(-3deg)';
   else endTransform = 'translateY(130%) rotate(3deg)';
 
-  const stack = document.getElementById('stack');
-  const rect = stack.getBoundingClientRect();
+  const rect = document.getElementById('stack').getBoundingClientRect();
   const magNow = Math.hypot(dx,dy);
   const diag = Math.hypot(rect.width, rect.height);
   const remainRatio = clamp(1 - magNow/(diag*0.7), 0, 1);
   let dur = 200 + Math.round(140*remainRatio);
   dur = clamp(dur, 200, 340);
 
-  let finished = false;
+  let finished=false;
   const finish = ()=>{
     if(finished) return;
-    finished = true;
+    finished=true;
     el.classList.add('notrans');
     el.style.transition='';
     el.style.transform='';
@@ -917,9 +916,21 @@ function applyExit(action, dragState, done){
   }, {once:true});
 }
 
+function swapNoTransition(mutator){
+  const top = document.getElementById('cardTop');
+  const below = document.getElementById('cardBelow');
+  top.classList.add('notrans');
+  below.classList.add('notrans');
+  mutator && mutator();
+  void top.offsetHeight;
+  void below.offsetHeight;
+  top.classList.remove('notrans');
+  below.classList.remove('notrans');
+}
+
 function gradeFromDir(dir, currentDrag){
   if(app.animating) return;
-  app.animating = true;
+  app.animating=true;
 
   const action =
     dir==='left'  ? 'again' :
@@ -942,19 +953,7 @@ function gradeFromDir(dir, currentDrag){
   });
 }
 
-function swapNoTransition(mutator){
-  const top = document.getElementById('cardTop');
-  const below = document.getElementById('cardBelow');
-  top.classList.add('notrans');
-  below.classList.add('notrans');
-  mutator && mutator();
-  void top.offsetHeight;
-  void below.offsetHeight;
-  top.classList.remove('notrans');
-  below.classList.remove('notrans');
-}
-
-/* ========= Gestos ========= */
+/* ===== Gestos ===== */
 (function gestures(){
   const el = document.getElementById('cardTop');
   let sx=0, sy=0, dx=0, dy=0, tracking=false, activePointer=null;
@@ -1013,7 +1012,6 @@ function swapNoTransition(mutator){
     e?.preventDefault?.();
 
     if(mag < TAP_TH){
-      // Tap: voltear sólo la carta actual (mostrar solución)
       const entry = currentEntry();
       if(entry){
         entry.showBack = !entry.showBack;
@@ -1050,7 +1048,7 @@ function swapNoTransition(mutator){
   });
 })();
 
-/* ========= Botones respuesta ========= */
+/* ===== Botones respuesta ===== */
 function freezeForButton(){
   if(app.animating) return;
   app.peekNextEntry = queueNextEntry();
@@ -1062,25 +1060,21 @@ hardBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('down',  {dx:0,  dy:80}
 goodBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('up',    {dx:0,  dy:-80}); };
 easyBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('right', {dx:80, dy:0}); };
 
-/* ========= Panel ajustes ========= */
+/* ===== Ajustes (sheet) ===== */
 openSettingsBtn.onclick  = ()=> bodyEl.classList.add('sheet-open');
 closeSettingsBtn.onclick = ()=> bodyEl.classList.remove('sheet-open');
 
 function syncSettingsUIFromCfg(){
-  if(!againPos) return;
   againPos.value = app.cfg.againPos;
   hardPos.value  = app.cfg.hardPos;
   goodPos.value  = app.cfg.goodPos;
   easyPos.value  = app.cfg.easyPos;
   passesNeeded.value = app.cfg.passesNeeded;
   orderSelect.value  = app.cfg.order || 'shuffle';
-  if(guessSelect){
-    guessSelect.value = app.cfg.guessMode || 'back';
-  }
+  guessSelect.value  = app.cfg.guessMode || 'back';
 }
 
 function applySettings(){
-  // Lectura segura de inputs
   const a = parseInt(againPos.value,10);
   const h = parseInt(hardPos.value,10);
   const gRaw = (goodPos.value || '').trim();
@@ -1098,13 +1092,11 @@ function applySettings(){
 
   app.cfg.passesNeeded = (!isNaN(p) && p>=1) ? p : 1;
 
-  const ord = orderSelect.value === 'original' ? 'original' : 'shuffle';
-  app.cfg.order = ord;
+  app.cfg.order = (orderSelect.value === 'original') ? 'original' : 'shuffle';
 
   const gm = guessSelect.value;
   app.cfg.guessMode = (gm === 'front' || gm === 'both') ? gm : 'back';
 
-  // Re-generar cola y progreso según nuevos ajustes
   buildQueue();
   renderAll();
   saveSession();
@@ -1112,19 +1104,16 @@ function applySettings(){
 
 applySettingsBtn.onclick = applySettings;
 
-/* ========= Import / Export ========= */
+/* ===== Import / Export ===== */
 async function importText(text, nameGuess='Baraja'){
   const trimmed = text.trim();
   if(!trimmed) return;
-
   const sep = getSelectedSep();
 
-  // Intentar JSON primero
   try{
     const obj = JSON.parse(trimmed);
 
     if(obj && (Array.isArray(obj.cards) || Array.isArray(obj.queue))){
-      // Sesión completa
       let restored = migrateAndSanitize(obj);
       restored.deckName = obj.deckName || nameGuess;
       app = restored;
@@ -1135,7 +1124,6 @@ async function importText(text, nameGuess='Baraja'){
     }
 
     if(Array.isArray(obj) && obj.length && (obj[0].front!==undefined || obj[0].Front!==undefined)){
-      // Array simple [{front,back}, ...]
       app.deckName = nameGuess;
       app.cards = obj.map(o=>({
         id: uid(),
@@ -1148,12 +1136,10 @@ async function importText(text, nameGuess='Baraja'){
       return;
     }
 
-    // Si no encaja, dejar que caiga a CSV
     throw new Error('JSON no reconocido');
   }catch(_){
-    // CSV (con o sin cabecera; 1ª col → frente, 2ª col → reverso)
     const rows = parseCSV(trimmed, sep);
-    if(!rows.length) { alert('CSV vacío.'); return; }
+    if(!rows.length){ alert('CSV vacío.'); return; }
 
     const clean = rows.filter(r => r.some(c => (c||'').trim() !== ''));
     if(!clean.length){ alert('CSV vacío.'); return; }
@@ -1197,7 +1183,6 @@ async function importText(text, nameGuess='Baraja'){
   }
 }
 
-/* Fichero */
 fileInput.addEventListener('change', async (e)=>{
   const f = e.target.files[0];
   if(!f) return;
@@ -1206,7 +1191,6 @@ fileInput.addEventListener('change', async (e)=>{
   e.target.value = '';
 });
 
-/* Pegado desde textarea */
 loadPasteBtn.addEventListener('click', ()=>{
   const txt = pasteArea.value;
   if(!txt.trim()){
@@ -1216,7 +1200,6 @@ loadPasteBtn.addEventListener('click', ()=>{
   importText(txt, 'Pegado ' + new Date().toLocaleString());
 });
 
-/* Exportar progreso completo */
 exportBtn.addEventListener('click', ()=>{
   if(!app.cards.length){
     alert('No hay nada que exportar.');
@@ -1242,8 +1225,7 @@ exportBtn.addEventListener('click', ()=>{
   setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
 });
 
-/* ========= Reset / Wipe ========= */
-/* 🔙: reset sólo progreso, mantiene cartas y ajustes */
+/* ===== Reset / Wipe ===== */
 resetBtn.onclick = ()=>{
   if(!app.cards.length){
     alert('No hay baraja cargada.');
@@ -1256,7 +1238,6 @@ resetBtn.onclick = ()=>{
   }
 };
 
-/* 🗑️: borrar TODO (cartas + progreso) */
 wipeAllBtn.onclick = ()=>{
   if(confirm('Esto eliminará TODAS las cartas y el progreso guardado.\n\n¿Seguro que quieres continuar?')){
     app = {
@@ -1285,7 +1266,7 @@ wipeAllBtn.onclick = ()=>{
   }
 };
 
-/* ========= Extra: Rebarajar desde ajustes ========= */
+/* ===== Rebarajar desde ajustes ===== */
 reshuffleBtn.addEventListener('click', ()=>{
   if(!app.queue.length){
     alert('No hay cartas para rebarajar.');
@@ -1293,10 +1274,9 @@ reshuffleBtn.addEventListener('click', ()=>{
   }
   const cur = currentEntry();
   shuffle(app.queue);
-  // Mantener la carta actual delante si existe
   if(cur){
     const idx = app.queue.findIndex(e => e.id===cur.id && e.showBack===cur.showBack);
-    if(idx > 0){
+    if(idx>0){
       const [entry] = app.queue.splice(idx,1);
       app.queue.unshift(entry);
     }
@@ -1305,7 +1285,7 @@ reshuffleBtn.addEventListener('click', ()=>{
   saveSession();
 });
 
-/* ========= Init ========= */
+/* ===== Init ===== */
 (function init(){
   if(!loadSession()){
     syncSettingsUIFromCfg();
