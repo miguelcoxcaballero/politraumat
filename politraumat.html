@@ -23,82 +23,206 @@
   html,body{height:100%}
   html{overflow:hidden}
   body{
-    margin:0; font: var(--fw)/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    margin:0;
+    font: var(--fw)/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     color:var(--ink);
     background:linear-gradient(180deg,#0b0f14,#0d1219 30%,#0c1118);
-    min-height:100dvh; display:flex; flex-direction:column;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
     -webkit-text-size-adjust:100%;
   }
 
-  header.topbar{height:var(--topbar-h); display:flex; align-items:center; gap:.45rem;
-    padding:0 .6rem; background:rgba(11,15,20,.9); backdrop-filter: blur(8px); border-bottom:1px solid #162234; overflow:hidden}
-  .brand{display:flex; align-items:center; gap:.25rem; font-weight:700; font-size:var(--head-fs); white-space:nowrap}
+  header.topbar{
+    height:var(--topbar-h);
+    display:flex;
+    align-items:center;
+    gap:.45rem;
+    padding:0 .6rem;
+    background:rgba(11,15,20,.9);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid #162234;
+    overflow:hidden;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:.25rem;
+    font-weight:700;
+    font-size:var(--head-fs);
+    white-space:nowrap;
+  }
   .brand-poli{color:#fff; letter-spacing:.2px}
   .brand-trauma{
     font-weight:800;
     background: linear-gradient(90deg,#ff0040,#ff7a00,#ffd400,#00d17a,#0096ff,#9b5cff,#ff3cd1);
     background-size: 200% 100%;
     background-position: 0% 50%;
-    -webkit-background-clip:text; background-clip:text;
-    -webkit-text-fill-color: transparent; color:transparent;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color: transparent;
+    color:transparent;
     letter-spacing:.2px;
     animation: rainbowSlide 6s linear infinite;
   }
-  @keyframes rainbowSlide{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+  @keyframes rainbowSlide{
+    0%{background-position:0% 50%}
+    100%{background-position:200% 50%}
+  }
 
   .spacer{flex:1}
   input[type=file]{display:none}
   .btn{
-    border:1px solid #2a3a4f; background:var(--btn); color:var(--ink);
-    padding:.35rem .6rem; border-radius:10px; cursor:pointer; transition:background .15s, transform .06s;
-    font-size: clamp(12px, 2.8vw, 14px); line-height:1; white-space:nowrap; flex:0 0 auto
+    border:1px solid #2a3a4f;
+    background:var(--btn);
+    color:var(--ink);
+    padding:.35rem .6rem;
+    border-radius:10px;
+    cursor:pointer;
+    transition:background .15s, transform .06s;
+    font-size: clamp(12px, 2.8vw, 14px);
+    line-height:1;
+    white-space:nowrap;
+    flex:0 0 auto;
   }
-  header.topbar .btn{display:inline-flex; align-items:center; justify-content:center; height:34px}
-  .btn:hover{background:var(--btnHover)} .btn:active{transform:translateY(1px)}
+  header.topbar .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:34px;
+  }
+  .btn:hover{background:var(--btnHover)}
+  .btn:active{transform:translateY(1px)}
   .btn.danger{border-color:#5b1a1a}
 
-  .statsbar{height:var(--statsbar-h); display:grid; grid-template-columns:repeat(3,1fr);
-    gap:.5rem; align-items:center; padding:.35rem .8rem; border-bottom:1px solid #162234;
-    background:rgba(12,17,24,.75); backdrop-filter: blur(6px)}
-  .chip{justify-self:stretch; text-align:center; padding:.25rem .5rem; border:1px solid #263447;
-    border-radius:999px; color:#9cb2c9; white-space:nowrap; overflow:visible; text-overflow:clip}
-
-  main{position:relative; height: calc(100dvh - var(--topbar-h) - var(--statsbar-h) - var(--toolbar-h) - env(safe-area-inset-bottom));
-    padding:.8rem; overflow:hidden}
-  .cardwrap{position:relative; height:100%; display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(180deg,#0c1118,#0a0f16); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden}
-  .dropzone{color:#a7b6c7; text-align:center; padding:1rem; width:100%}
-
-  .stack{ position:relative; width:min(96%, 760px); height:min(96%, 100%) }
-  .card{
-    position:absolute; inset:0; border-radius:14px; padding:1.1rem 1.2rem; user-select:none; touch-action: none;
-    background: radial-gradient(1200px 400px at 50% -10%, rgba(99,179,237,.08), transparent),
-               linear-gradient(180deg,#0e1520,#0b1117 40%,#0a0f15);
-    border:1px solid #1e2a3c; box-shadow:var(--shadow); display:flex; flex-direction:column; overflow:hidden;
-    transition: transform .22s ease, opacity .22s ease; will-change: transform, opacity;
+  .statsbar{
+    height:var(--statsbar-h);
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.5rem;
+    align-items:center;
+    padding:.35rem .8rem;
+    border-bottom:1px solid #162234;
+    background:rgba(12,17,24,.75);
+    backdrop-filter: blur(6px);
   }
-  .cardBelow{ filter:saturate(.96) brightness(.985); opacity:.97 }
-  .badge{position:absolute; right:.8rem; top:.8rem; font-size:.9rem; color:#b4c5d6; pointer-events:none}
-  .card h2{margin:0 0 .5rem; font-size: clamp(15px, 3.2vw, 20px); color:#cfe3ff}
+  .chip{
+    justify-self:stretch;
+    text-align:center;
+    padding:.25rem .5rem;
+    border:1px solid #263447;
+    border-radius:999px;
+    color:#9cb2c9;
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+  }
 
-  /* Contenido sin sombras ni velos */
+  main{
+    position:relative;
+    height: calc(100dvh - var(--topbar-h) - var(--statsbar-h) - var(--toolbar-h) - env(safe-area-inset-bottom));
+    padding:.8rem;
+    overflow:hidden;
+  }
+  .cardwrap{
+    position:relative;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(180deg,#0c1118,#0a0f16);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .dropzone{
+    color:#a7b6c7;
+    text-align:center;
+    padding:1rem;
+    width:100%;
+  }
+
+  .stack{
+    position:relative;
+    width:min(96%, 760px);
+    height:min(96%, 100%);
+  }
+  .card{
+    position:absolute;
+    inset:0;
+    border-radius:14px;
+    padding:1.1rem 1.2rem;
+    user-select:none;
+    touch-action:none;
+    background:
+      radial-gradient(1200px 400px at 50% -10%, rgba(99,179,237,.08), transparent),
+      linear-gradient(180deg,#0e1520,#0b1117 40%,#0a0f15);
+    border:1px solid #1e2a3c;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    transition: transform .22s ease, opacity .22s ease;
+    will-change: transform, opacity;
+  }
+  .cardBelow{
+    filter:saturate(.96) brightness(.985);
+    opacity:.97;
+  }
+  .badge{
+    position:absolute;
+    right:.8rem;
+    top:.8rem;
+    font-size:.9rem;
+    color:#b4c5d6;
+    pointer-events:none;
+  }
+  .card h2{
+    margin:0 0 .5rem;
+    font-size: clamp(15px, 3.2vw, 20px);
+    color:#cfe3ff;
+  }
+
   .face{
-    white-space:pre-wrap; font-size: var(--card-fs); line-height:1.5; overflow:auto; padding-bottom:1rem;
-    scrollbar-width: thin; text-shadow:none !important; background:transparent !important;
-    -webkit-user-select:text; user-select:text;
+    white-space:pre-wrap;
+    font-size: var(--card-fs);
+    line-height:1.5;
+    overflow:auto;
+    padding-bottom:1rem;
+    scrollbar-width: thin;
+    text-shadow:none !important;
+    background:transparent !important;
+    -webkit-user-select:text;
+    user-select:text;
   }
   .face::-webkit-scrollbar{width:8px}
-  .face::-webkit-scrollbar-thumb{background:#1b2740;border-radius:8px}
-  /* Quitamos cualquier sombreado inferior */
-  /* .fadeBottom:after { eliminado } */
+  .face::-webkit-scrollbar-thumb{
+    background:#1b2740;
+    border-radius:8px;
+  }
 
   .swipe-hint{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-    font-weight:700; letter-spacing:.3px; color:#fff; mix-blend-mode:screen; text-shadow:0 2px 16px rgba(0,0,0,.35);
-    opacity:0; border-radius: inherit; pointer-events:none;
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    letter-spacing:.3px;
+    color:#fff;
+    mix-blend-mode:screen;
+    text-shadow:0 2px 16px rgba(0,0,0,.35);
+    opacity:0;
+    border-radius:inherit;
+    pointer-events:none;
     transition: opacity .06s linear;
   }
-  @keyframes hintFlash{0%{opacity:0} 18%{opacity:1} 82%{opacity:1} 100%{opacity:0}}
+  @keyframes hintFlash{
+    0%{opacity:0}
+    18%{opacity:1}
+    82%{opacity:1}
+    100%{opacity:0}
+  }
   .flash{ animation: hintFlash .5s ease-in-out both }
   .hint-left {background:linear-gradient(90deg,  rgba(239,68,68,.65),  transparent)}
   .hint-right{background:linear-gradient(270deg, rgba(37,99,235,.65), transparent)}
@@ -109,33 +233,84 @@
   .exit-right{ transform: translateX(130%)  rotate( 6deg); opacity:0 }
   .exit-up   { transform: translateY(-130%) rotate(-3deg); opacity:0 }
   .exit-down { transform: translateY(130%)  rotate( 3deg); opacity:0 }
-  .notrans   { transition: none !important }
-  .noanim    { animation: none !important }
+  .notrans   { transition:none !important }
+  .noanim    { animation:none !important }
 
-  nav.toolbar{ position:fixed; left:0; right:0; bottom:0; z-index:40;
+  nav.toolbar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:40;
     background:linear-gradient(180deg,rgba(9,13,18,.4),rgba(9,13,18,.92));
-    backdrop-filter: blur(12px); border-top:1px solid #162234; padding: .6rem .8rem calc(.6rem + env(safe-area-inset-bottom)) }
-  .rowBtns{display:grid; grid-template-columns:repeat(4, 1fr); gap:.6rem}
-  .tbtn{ display:flex; align-items:center; justify-content:center; padding: clamp(14px, 3.6vw, 18px) .4rem;
-    font-size: clamp(14px, 3.2vw, 18px); border-radius:14px; color:#f2f6fb; border:1px solid transparent }
+    backdrop-filter: blur(12px);
+    border-top:1px solid #162234;
+    padding:.6rem .8rem calc(.6rem + env(safe-area-inset-bottom));
+  }
+  .rowBtns{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:.6rem;
+  }
+  .tbtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:clamp(14px, 3.6vw, 18px) .4rem;
+    font-size:clamp(14px, 3.2vw, 18px);
+    border-radius:14px;
+    color:#f2f6fb;
+    border:1px solid transparent;
+  }
   .again{background:linear-gradient(180deg,#dc2626,#991b1b)}
   .hard {background:linear-gradient(180deg,#d97706,#9a3f05)}
   .good {background:linear-gradient(180deg,#059669,#047857)}
   .easy {background:linear-gradient(180deg,#1d4ed8,#1e40af)}
-  .tiny{font-size:.9rem; color:#91a4b8; margin-top:.35rem; text-align:center}
+  .tiny{
+    font-size:.9rem;
+    color:#91a4b8;
+    margin-top:.35rem;
+    text-align:center;
+  }
 
-  .sheet-panel{ position:fixed; left:0; right:0; bottom:0; z-index:50; transform: translateY(110%); transition: transform .25s ease;
-    background:linear-gradient(180deg,rgba(12,17,24,.98),rgba(10,14,20,.98)); border-top:1px solid #162234; border-radius:16px 16px 0 0; padding:1rem .9rem;
-    max-height:80dvh; overflow:auto }
-  .sheet-open .sheet-panel{ transform: translateY(0) }
-  .sheet-head{display:flex; align-items:center; gap:.6rem; margin-bottom:.6rem}
+  .sheet-panel{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:50;
+    transform:translateY(110%);
+    transition: transform .25s ease;
+    background:linear-gradient(180deg,rgba(12,17,24,.98),rgba(10,14,20,.98));
+    border-top:1px solid #162234;
+    border-radius:16px 16px 0 0;
+    padding:1rem .9rem;
+    max-height:80dvh;
+    overflow:auto;
+  }
+  .sheet-open .sheet-panel{ transform:translateY(0) }
+  .sheet-head{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    margin-bottom:.6rem;
+  }
   .sheet-title{font-weight:700}
-  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:.6rem}
-  textarea{width:100%; min-height:110px; resize:vertical; color:#e8ecf1; background:#0c1218; border:1px solid #203249; border-radius:10px; padding:.7rem; font-family:inherit}
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.6rem;
+  }
+  textarea{
+    width:100%;
+    min-height:110px;
+    resize:vertical;
+    color:#e8ecf1;
+    background:#0c1218;
+    border:1px solid #203249;
+    border-radius:10px;
+    padding:.7rem;
+    font-family:inherit;
+  }
 
-  input, select, textarea { font-size: 16px }
+  input, select, textarea { font-size:16px }
 
-  /* Anti-long-press/selección accidental en la tarjeta */
   .card, .card * { -webkit-touch-callout:none }
 </style>
 </head>
@@ -149,7 +324,8 @@
   <input type="file" id="file" accept=".csv,.json,text/csv,application/json" />
   <label for="file" class="btn" title="Importar CSV/JSON">📥 Importar</label>
   <button class="btn" id="exportBtn" title="Exportar JSON (baraja + progreso)">📤 Exportar</button>
-  <button class="btn danger" id="resetBtn" title="Resetear">🗑️</button>
+  <button class="btn" id="resetBtn" title="Resetear sólo el progreso">🔙</button>
+  <button class="btn danger" id="wipeAllBtn" title="Borrar TODO (cartas + progreso)">🗑️</button>
   <button class="btn" id="openSettingsBtn" title="Ajustes">⚙️</button>
 </header>
 
@@ -176,7 +352,8 @@
     </div>
     <div class="dropzone" id="dzHelp">
       <b>Usa “📥 Importar” para cargar tu baraja (CSV o JSON).</b>
-      <div>CSV: <code>Front,Back</code> (soporta saltos de línea entrecomillados).</div>
+      <div>CSV con o sin cabecera Front,Back. Si no hay cabecera, la 1ª columna será Frente y la 2ª Reverso.</div>
+      <div>Elige el separador y el modo de “adivinar” en Ajustes antes de importar si quieres.</div>
     </div>
   </section>
 
@@ -192,7 +369,9 @@
       <label>Hard +<input  id="hardPos"  type="number" inputmode="numeric" value="5" min="2" class="btn" style="width:100%"></label>
       <label>Good →<input  id="goodPos"  type="text"   value="10" class="btn" style="width:100%"></label>
       <label>Easy →<input  id="easyPos"  type="text"   value="end" class="btn" style="width:100%"></label>
-      <label>Aciertos para dominar<input id="passesNeeded" type="number" inputmode="numeric" value="1" min="1" max="10" class="btn" style="width:100%"></label>
+      <label>Aciertos para dominar
+        <input id="passesNeeded" type="number" inputmode="numeric" value="1" min="1" max="10" class="btn" style="width:100%">
+      </label>
       <label>Orden inicial
         <select id="orderSelect" class="btn" style="width:100%">
           <option value="shuffle">Aleatorio</option>
@@ -202,12 +381,41 @@
     </div>
 
     <div style="height:.8rem"></div>
-    <h3 style="margin:0 0 .4rem">Pegar CSV (opcional)</h3>
-    <textarea id="pasteArea" placeholder="Pega CSV con cabeceras Front,Back..."></textarea>
+
+    <h3 style="margin:0 0 .4rem">Modo de adivinanza</h3>
+    <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin-bottom:.4rem">
+      <span>Adivinar:</span>
+      <select id="guessSelect" class="btn" style="padding:.25rem .5rem">
+        <!-- valores internos: 'back' = adivinar reverso (muestra frente), 'front' = adivinar frente (muestra reverso), 'both' = ambos lados -->
+        <option value="back">reverso</option>
+        <option value="front">frente</option>
+        <option value="both">ambos</option>
+      </select>
+      <span style="font-size:.8rem; color:#9cb2c9">
+        “Ambos” muestra cada carta dos veces: una por cada lado.
+      </span>
+    </div>
+
+    <h3 style="margin:.4rem 0 .4rem">Separador y pegado</h3>
+    <div style="display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-bottom:.4rem">
+      <span>Separador CSV:</span>
+      <select id="sepSelect" class="btn" style="padding:.25rem .5rem">
+        <option value=",">,</option>
+        <option value=";">;</option>
+        <option value=":">:</option>
+        <option value="-">-</option>
+      </select>
+    </div>
+
+    <textarea id="pasteArea" placeholder="Pega CSV (con el separador elegido, con o sin Front,Back) o JSON compatible..."></textarea>
+
     <div style="margin-top:.5rem; display:flex; gap:.6rem; flex-wrap:wrap">
       <button class="btn" id="loadPasteBtn">Cargar desde texto</button>
       <button class="btn" id="reshuffleBtn" title="Rebarajar cola">🎲 Rebarajar</button>
-      <button class="btn" id="flipStartBtn" title="Mostrar reverso al cargar">🔄 Frente/Reverso</button>
+    </div>
+
+    <div style="margin-top:.7rem; display:flex; gap:.6rem; flex-wrap:wrap; justify-content:flex-end">
+      <button class="btn" id="applySettingsBtn" title="Aplicar ajustes de sesión">Aplicar ajustes</button>
     </div>
   </div>
 </main>
@@ -219,90 +427,363 @@
     <button class="tbtn good"  id="goodBtn"  aria-label="Good">Good</button>
     <button class="tbtn easy"  id="easyBtn"  aria-label="Easy">Easy</button>
   </div>
-  <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy</div>
+  <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy — Toca la carta para voltear.</div>
 </nav>
 
 <script>
 /* ========= Utilidades ========= */
 const uid = ()=> Math.random().toString(36).slice(2)+Date.now().toString(36);
-function parseCSV(text){
-  const rows=[]; let i=0, field='', row=[], inQuotes=false;
+
+function parseCSV(text, sep){
+  const S = sep || ',';
+  const rows=[];
+  let i=0, field='', row=[], inQuotes=false;
   while(i < text.length){
     const c = text[i];
     if(inQuotes){
-      if(c === '"'){ if(text[i+1] === '"'){ field += '"'; i+=2; continue; } inQuotes = false; i++; continue; }
+      if(c === '"'){
+        if(text[i+1] === '"'){ field += '"'; i+=2; continue; }
+        inQuotes = false; i++; continue;
+      }
       field += c; i++; continue;
     } else {
       if(c === '"'){ inQuotes = true; i++; continue; }
-      if(c === ','){ row.push(field); field=''; i++; continue; }
+      if(c === S){ row.push(field); field=''; i++; continue; }
       if(c === '\r'){ i++; continue; }
-      if(c === '\n'){ row.push(field); rows.push(row); row=[]; field=''; i++; continue; }
+      if(c === '\n'){
+        row.push(field); rows.push(row);
+        row=[]; field=''; i++; continue;
+      }
       field += c; i++;
     }
   }
   row.push(field); rows.push(row);
-  while(rows.length && rows[rows.length-1].every(x => x.trim()==='')) rows.pop();
+  while(rows.length && rows[rows.length-1].every(x => (x||'').trim()==='')) rows.pop();
   return rows;
 }
-function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]] } return arr; }
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
 const clamp=(v,min,max)=> Math.max(min, Math.min(max, v));
+
+/* ========= DOM ========= */
+const remStat        = document.getElementById('remStat');
+const doneStat       = document.getElementById('doneStat');
+const masteredStat   = document.getElementById('masteredStat');
+
+const againBtn       = document.getElementById('againBtn');
+const hardBtn        = document.getElementById('hardBtn');
+const goodBtn        = document.getElementById('goodBtn');
+const easyBtn        = document.getElementById('easyBtn');
+
+const openSettingsBtn  = document.getElementById('openSettingsBtn');
+const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+
+const againPos      = document.getElementById('againPos');
+const hardPos       = document.getElementById('hardPos');
+const goodPos       = document.getElementById('goodPos');
+const easyPos       = document.getElementById('easyPos');
+const passesNeeded  = document.getElementById('passesNeeded');
+const orderSelect   = document.getElementById('orderSelect');
+const guessSelect   = document.getElementById('guessSelect');
+const sepSelect     = document.getElementById('sepSelect');
+
+const pasteArea     = document.getElementById('pasteArea');
+const loadPasteBtn  = document.getElementById('loadPasteBtn');
+const reshuffleBtn  = document.getElementById('reshuffleBtn');
+const applySettingsBtn = document.getElementById('applySettingsBtn');
+
+const fileInput     = document.getElementById('file');
+const exportBtn     = document.getElementById('exportBtn');
+const resetBtn      = document.getElementById('resetBtn');
+const wipeAllBtn    = document.getElementById('wipeAllBtn');
+
+const bodyEl        = document.body;
+
+/* ========= Helpers ========= */
+function getSelectedSep(){
+  return (sepSelect && sepSelect.value) ? sepSelect.value : ',';
+}
 
 /* ========= Estado ========= */
 const STORAGE_KEY='ankiCram.mobile.v15.progress';
 let app={
   version: 3,
   deckName:'Sin baraja',
-  cards:[], queue:[], currentId:null, showBack:false,
+  cards:[],
+  // queue: array de {id, showBack}
+  queue:[],
   stats:{done:0, mastered:0},
-  cfg:{ againPos:2, hardPos:5, goodPos:10, easyPos:'end', passesNeeded:1, showStart:'front', order:'shuffle' },
+  cfg:{
+    againPos:2,
+    hardPos:5,
+    goodPos:10,
+    easyPos:'end',
+    passesNeeded:1,
+    order:'shuffle',
+    guessMode:'back' // 'back' (adivinar reverso), 'front' (adivinar frente), 'both'
+  },
   meta:{},
-  peekNextId:null,
+  peekNextEntry:null,
   freezeBelow:false,
   animating:false
 };
 
-/* ========= Persistencia ========= */
-const saveSession = ()=> localStorage.setItem(STORAGE_KEY, JSON.stringify(app));
+/* ========= Queue helpers ========= */
+function makeEntryForId(id, cfg){
+  if(cfg.guessMode === 'front') return {id, showBack:true};
+  if(cfg.guessMode === 'back')  return {id, showBack:false};
+  // 'both' se maneja aparte; por defecto mostramos frente (para adivinar reverso)
+  return {id, showBack:false};
+}
+
+function currentEntry(){ return app.queue[0] || null; }
+function queueNextEntry(){ return app.queue[1] || null; }
+
+function cardById(id){
+  return app.cards.find(c=>c.id===id) || null;
+}
+function currentCard(){
+  const e = currentEntry();
+  return e ? cardById(e.id) : null;
+}
+
+/* ========= Persistencia & migración ========= */
+function sanitizeQueue(raw, cfg, cards){
+  const validIds = new Set(cards.map(c=>c.id));
+  const out=[];
+  const src = Array.isArray(raw) ? raw : [];
+
+  for(const item of src){
+    if(!item) continue;
+    if(typeof item === 'string' || typeof item === 'number'){
+      const id = String(item);
+      if(!validIds.has(id)) continue;
+      out.push(makeEntryForId(id, cfg));
+    } else if(typeof item === 'object' && typeof item.id === 'string'){
+      if(!validIds.has(item.id)) continue;
+      let showBack = !!item.showBack;
+      if(cfg.guessMode === 'front') showBack = true;
+      else if(cfg.guessMode === 'back') showBack = false;
+      out.push({id:item.id, showBack});
+    }
+  }
+
+  // Si venimos de una versión sin info o quedó vacío, reconstruimos completo
+  if(!out.length){
+    if(cfg.guessMode === 'both'){
+      for(const c of cards){
+        out.push({id:c.id, showBack:false});
+        out.push({id:c.id, showBack:true});
+      }
+    } else if(cfg.guessMode === 'front'){
+      for(const c of cards) out.push({id:c.id, showBack:true});
+    } else {
+      for(const c of cards) out.push({id:c.id, showBack:false});
+    }
+  }
+
+  if(cfg.order === 'shuffle') shuffle(out);
+  return out;
+}
+
+function migrateAndSanitize(obj){
+  let out = {...app, ...obj};
+  out.version = 3;
+
+  out.cards = (out.cards||[]).map(c=>({
+    id: c.id || uid(),
+    front: c.front ?? '',
+    back:  c.back  ?? ''
+  }));
+
+  out.cfg = {...app.cfg, ...(out.cfg||{})};
+
+  // Inferir guessMode si no existe (desde showStart antiguo si estuviera)
+  if(!out.cfg.guessMode){
+    if(out.cfg.showStart === 'back') out.cfg.guessMode = 'front';
+    else out.cfg.guessMode = 'back';
+  }
+  if(!['front','back','both'].includes(out.cfg.guessMode)){
+    out.cfg.guessMode = 'back';
+  }
+  if(out.cfg.order !== 'original' && out.cfg.order !== 'shuffle'){
+    out.cfg.order = 'shuffle';
+  }
+
+  const meta={};
+  for(const c of out.cards){
+    const m=(out.meta||{})[c.id]||{};
+    const streak = m.streak|0;
+    meta[c.id] = {
+      seen: m.seen|0,
+      streak,
+      correct: m.correct|0,
+      remaining: Math.max(1, (out.cfg.passesNeeded ?? app.cfg.passesNeeded) - streak)
+    };
+  }
+  out.meta = meta;
+
+  out.queue = sanitizeQueue(out.queue, out.cfg, out.cards);
+
+  out.stats = {
+    done: out.stats?.done|0,
+    mastered: out.stats?.mastered|0
+  };
+
+  out.peekNextEntry = null;
+  out.freezeBelow = false;
+  out.animating = false;
+
+  return out;
+}
+
+const saveSession = ()=>{
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(app)); }catch(e){}
+};
+
 function loadSession(){
   try{
-    const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||''); if(!data) return false;
-    app = migrateAndSanitize(data); renderAll(); return true;
-  }catch(e){ return false; }
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return false;
+    const data = JSON.parse(raw);
+    if(!data) return false;
+    app = migrateAndSanitize(data);
+    syncSettingsUIFromCfg();
+    renderAll();
+    return true;
+  }catch(e){
+    return false;
+  }
 }
 
-/* ========= Construcción ========= */
-const makeCard=(front,back)=>({id:uid(), front, back});
+/* ========= Construcción de cola según ajustes ========= */
 function buildQueue(){
-  app.queue = app.cards.map(c=>c.id);
-  if(app.cfg.order==='shuffle') shuffle(app.queue);
-  app.meta={}; for(const c of app.cards){ app.meta[c.id]={seen:0, streak:0, correct:0, remaining:app.cfg.passesNeeded}; }
-  app.stats={done:0, mastered:0};
-  app.currentId = app.queue[0] || null;
-  app.showBack = (app.cfg.showStart==='back');
-  app.peekNextId = null; app.freezeBelow=false; app.animating=false;
+  const mode = app.cfg.guessMode || 'back';
+  const q = [];
+
+  if(!app.cards.length){
+    app.queue = [];
+    app.meta = {};
+    app.stats = {done:0, mastered:0};
+    app.peekNextEntry = null;
+    app.freezeBelow = false;
+    app.animating = false;
+    return;
+  }
+
+  if(mode === 'both'){
+    // Cada carta aparece dos veces: una mostrando frente (adivinar reverso) y otra mostrando reverso (adivinar frente)
+    for(const c of app.cards){
+      q.push({id:c.id, showBack:false});
+      q.push({id:c.id, showBack:true});
+    }
+  } else if(mode === 'front'){
+    // Adivinar frente => mostramos reverso
+    for(const c of app.cards) q.push({id:c.id, showBack:true});
+  } else { // 'back'
+    // Adivinar reverso => mostramos frente
+    for(const c of app.cards) q.push({id:c.id, showBack:false});
+  }
+
+  if(app.cfg.order === 'shuffle') shuffle(q);
+
+  app.queue = q;
+  app.meta = {};
+  for(const c of app.cards){
+    app.meta[c.id] = {
+      seen:0,
+      streak:0,
+      correct:0,
+      remaining:app.cfg.passesNeeded
+    };
+  }
+  app.stats = {done:0, mastered:0};
+  app.peekNextEntry = null;
+  app.freezeBelow = false;
+  app.animating = false;
 }
 
-/* ========= Helpers ========= */
-const currentCard = ()=> app.cards.find(c=>c.id===app.currentId)||null;
-const cardById    = (id)=> app.cards.find(c=>c.id===id)||null;
-const queueNextId = ()=> app.queue[1] || null;
-
-/* ========= Cola ========= */
-function moveCurrent(delta){
-  if(app.queue.length<=1) return;
-  const id = app.queue.shift();
-  if(delta==='end') app.queue.push(id);
-  else { const pos = Math.max(0, Math.min(app.queue.length, parseInt(delta||0,10))); app.queue.splice(pos, 0, id); }
-  app.currentId = app.queue[0]; app.showBack = (app.cfg.showStart==='back');
+/* ========= Render ========= */
+function renderStats(){
+  remStat.textContent = String(app.queue.length);
+  doneStat.textContent = String(app.stats.done||0);
+  masteredStat.textContent = String(app.stats.mastered||0);
 }
-function removeCurrentAsMastered(){ app.queue.shift(); app.stats.mastered += 1; app.currentId = app.queue[0] || null; }
 
-/* ========= Hint control ========= */
+function fillCard(prefix, cardObj, showBack){
+  const badge = document.getElementById(prefix==='Top' ? 'sideBadge' : 'sideBadgeBelow');
+  const title = document.getElementById(prefix==='Top' ? 'cardTitle' : 'cardTitleBelow');
+  const face  = document.getElementById(prefix==='Top' ? 'cardFace' : 'cardFaceBelow');
+  const art   = document.getElementById('card'+prefix);
+
+  if(!cardObj){
+    art.style.display='none';
+    face.textContent='';
+    return;
+  }
+  art.style.display='flex';
+
+  const isBack = !!showBack;
+  const label = isBack ? 'Reverso' : 'Frente';
+
+  badge.textContent = label;
+  title.textContent = label;
+  face.textContent  = isBack ? (cardObj.back || '') : (cardObj.front || '');
+  face.scrollTop = 0;
+}
+
+function renderStack(){
+  const stack = document.getElementById('stack');
+  const help  = document.getElementById('dzHelp');
+
+  const entry = currentEntry();
+  const card = entry ? cardById(entry.id) : null;
+
+  if(!card){
+    stack.style.display='none';
+    help.style.display='block';
+    return;
+  }
+
+  help.style.display='none';
+  stack.style.display='block';
+
+  clearHint();
+
+  // Carta superior (actual)
+  fillCard('Top', card, entry.showBack);
+
+  // Carta inferior (siguiente)
+  let nextEntry = (app.freezeBelow && app.peekNextEntry) ? app.peekNextEntry : queueNextEntry();
+  if(nextEntry && !cardById(nextEntry.id)) nextEntry = null;
+  const nextCard = nextEntry ? cardById(nextEntry.id) : null;
+  fillCard('Below', nextCard, nextEntry ? nextEntry.showBack : false);
+}
+
+function renderAll(){
+  renderStats();
+  renderStack();
+}
+
+/* ========= Hint ========= */
 const hint = ()=> document.getElementById('swHint');
+
 function setHintDirOpacity(dir, opa){
   const h = hint();
-  h.classList.remove('flash'); h.classList.add('noanim');
-  h.className = 'swipe-hint ' + (dir==='left'?'hint-left':dir==='right'?'hint-right':dir==='up'?'hint-up':'hint-down');
+  h.classList.remove('flash');
+  h.classList.add('noanim');
+  h.className = 'swipe-hint ' + (
+    dir==='left'  ? 'hint-left' :
+    dir==='right' ? 'hint-right' :
+    dir==='up'    ? 'hint-up' :
+                    'hint-down'
+  );
   h.style.opacity = String(clamp(opa,0,1));
 }
 function clearHint(){
@@ -311,56 +792,86 @@ function clearHint(){
   h.classList.remove('flash','hint-left','hint-right','hint-up','hint-down');
   h.className = 'swipe-hint';
   h.style.opacity='0';
-  void h.offsetHeight; h.classList.remove('noanim');
+  void h.offsetHeight;
+  h.classList.remove('noanim');
 }
 function flashHintFinal(dir){
   const h = hint();
   h.classList.remove('noanim','flash');
-  h.className = 'swipe-hint ' + (dir==='left'?'hint-left':dir==='right'?'hint-right':dir==='up'?'hint-up':'hint-down');
+  h.className = 'swipe-hint ' + (
+    dir==='left'  ? 'hint-left' :
+    dir==='right' ? 'hint-right' :
+    dir==='up'    ? 'hint-up' :
+                    'hint-down'
+  );
   void h.offsetWidth;
   h.classList.add('flash');
   setTimeout(clearHint, 520);
 }
 
-/* ========= Nota / calificación ========= */
-function performGrade(action){
-  const c=currentCard(); if(!c) return;
-  const m=app.meta[c.id] || (app.meta[c.id]={seen:0,streak:0,correct:0,remaining:app.cfg.passesNeeded});
-  m.seen+=1;
-
-  if(action==='again'){ m.streak=0; app.stats.done+=1; moveCurrent(app.cfg.againPos); }
-  else if(action==='hard'){ m.streak=Math.max(0, m.streak-1); app.stats.done+=1; moveCurrent(app.cfg.hardPos); }
-  else if(action==='good'){ m.streak+=1; m.correct+=1; m.remaining = Math.max(1, app.cfg.passesNeeded - m.streak); moveCurrent(app.cfg.goodPos); }
-  else if(action==='easy'){ m.streak+=2; m.correct+=1; m.remaining = Math.max(0, app.cfg.passesNeeded - m.streak);
-    if(m.remaining===0){ app.stats.done+=1; removeCurrentAsMastered(); } else { moveCurrent(app.cfg.easyPos); }
+/* ========= Movimiento en cola ========= */
+function moveCurrent(delta){
+  if(app.queue.length <= 1) return;
+  const entry = app.queue.shift();
+  if(delta === 'end'){
+    app.queue.push(entry);
+  }else{
+    const pos = Math.max(0, Math.min(app.queue.length, parseInt(delta||0,10)));
+    app.queue.splice(pos, 0, entry);
   }
 }
 
-/* ========= Orquestador salida ========= */
-function gradeFromDir(dir, currentDrag){
-  if(app.animating) return;
-  app.animating = true;
-
-  const action = dir==='left' ? 'again' : dir==='right' ? 'easy' : dir==='up' ? 'good' : 'hard';
-  flashHintFinal(dir);
-  applyExit(action, currentDrag, ()=>{
-    performGrade(action);
-    app.peekNextId = null; app.freezeBelow=false;
-    app.animating = false;
-
-    swapNoTransition(()=>{
-      clearHint();
-      renderAll();
-    });
-    saveSession();
-  });
+function removeCurrentAsMastered(){
+  app.queue.shift();
+  app.stats.mastered += 1;
 }
 
-/* ========= Animación salida ========= */
+/* ========= Nota / calificación ========= */
+function performGrade(action){
+  const entry = currentEntry();
+  const card = currentCard();
+  if(!entry || !card) return;
+
+  const id = entry.id;
+  const m = app.meta[id] || (app.meta[id] = {
+    seen:0, streak:0, correct:0, remaining:app.cfg.passesNeeded
+  });
+
+  m.seen += 1;
+
+  if(action==='again'){
+    m.streak = 0;
+    app.stats.done += 1;
+    moveCurrent(app.cfg.againPos);
+  } else if(action==='hard'){
+    m.streak = Math.max(0, m.streak-1);
+    app.stats.done += 1;
+    moveCurrent(app.cfg.hardPos);
+  } else if(action==='good'){
+    m.streak += 1;
+    m.correct += 1;
+    m.remaining = Math.max(1, app.cfg.passesNeeded - m.streak);
+    app.stats.done += 1;
+    moveCurrent(app.cfg.goodPos);
+  } else if(action==='easy'){
+    m.streak += 2;
+    m.correct += 1;
+    m.remaining = Math.max(0, app.cfg.passesNeeded - m.streak);
+    if(m.remaining === 0){
+      app.stats.done += 1;
+      removeCurrentAsMastered();
+    }else{
+      moveCurrent(app.cfg.easyPos);
+    }
+  }
+}
+
+/* ========= Animaciones ========= */
 function applyExit(action, dragState, done){
   const el = document.getElementById('cardTop');
   const {dx=0, dy=0} = dragState || {};
   const startRot = clamp(dx*0.06, -6, 6);
+
   el.style.transition='none';
   el.style.transform = `translate(${dx}px, ${dy}px) rotate(${startRot}deg)`;
   el.style.filter='';
@@ -371,95 +882,109 @@ function applyExit(action, dragState, done){
   else if(action==='good') endTransform = 'translateY(-130%) rotate(-3deg)';
   else endTransform = 'translateY(130%) rotate(3deg)';
 
-  const rect = document.getElementById('stack').getBoundingClientRect();
-  const magNow = Math.hypot(dx,dy), diag = Math.hypot(rect.width, rect.height);
+  const stack = document.getElementById('stack');
+  const rect = stack.getBoundingClientRect();
+  const magNow = Math.hypot(dx,dy);
+  const diag = Math.hypot(rect.width, rect.height);
   const remainRatio = clamp(1 - magNow/(diag*0.7), 0, 1);
-  let dur = 200 + Math.round(140*remainRatio); dur = clamp(dur, 200, 340);
+  let dur = 200 + Math.round(140*remainRatio);
+  dur = clamp(dur, 200, 340);
 
-  let finished=false;
+  let finished = false;
   const finish = ()=>{
-    if(finished) return; finished=true;
-    el.classList.add('notrans'); el.style.transition=''; el.style.transform=''; el.style.opacity=''; el.style.filter='';
-    void el.offsetHeight; el.classList.remove('notrans');
+    if(finished) return;
+    finished = true;
+    el.classList.add('notrans');
+    el.style.transition='';
+    el.style.transform='';
+    el.style.opacity='';
+    el.style.filter='';
+    void el.offsetHeight;
+    el.classList.remove('notrans');
     done && done();
   };
 
   requestAnimationFrame(()=>{
     el.style.transition = `transform ${dur}ms ease, opacity ${dur}ms ease`;
-    el.style.transform  = endTransform; el.style.opacity = '0';
+    el.style.transform  = endTransform;
+    el.style.opacity    = '0';
   });
 
-  const to = setTimeout(finish, dur+100);
-  el.addEventListener('transitionend', ()=>{ clearTimeout(to); finish(); }, {once:true});
+  const to = setTimeout(finish, dur+120);
+  el.addEventListener('transitionend', ()=>{
+    clearTimeout(to);
+    finish();
+  }, {once:true});
 }
 
-/* ========= Swap sin transiciones ========= */
+function gradeFromDir(dir, currentDrag){
+  if(app.animating) return;
+  app.animating = true;
+
+  const action =
+    dir==='left'  ? 'again' :
+    dir==='right' ? 'easy'  :
+    dir==='up'    ? 'good'  : 'hard';
+
+  flashHintFinal(dir);
+
+  applyExit(action, currentDrag, ()=>{
+    performGrade(action);
+    app.peekNextEntry = null;
+    app.freezeBelow = false;
+    app.animating = false;
+
+    swapNoTransition(()=>{
+      clearHint();
+      renderAll();
+    });
+    saveSession();
+  });
+}
+
 function swapNoTransition(mutator){
   const top = document.getElementById('cardTop');
   const below = document.getElementById('cardBelow');
-  top.classList.add('notrans'); below.classList.add('notrans');
+  top.classList.add('notrans');
+  below.classList.add('notrans');
   mutator && mutator();
-  void top.offsetHeight; void below.offsetHeight;
-  top.classList.remove('notrans'); below.classList.remove('notrans');
+  void top.offsetHeight;
+  void below.offsetHeight;
+  top.classList.remove('notrans');
+  below.classList.remove('notrans');
 }
 
-/* ========= Render ========= */
-function renderAll(){ renderStats(); renderStack(); }
-function renderStats(){
-  remStat.textContent = String(app.queue.length);
-  doneStat.textContent = String(app.stats.done||0);
-  masteredStat.textContent = String(app.stats.mastered||0);
-}
-function fillCard(elPrefix, cardObj, showBack=false){
-  const badge = document.getElementById(elPrefix==='Top'?'sideBadge':'sideBadgeBelow');
-  const title = document.getElementById(elPrefix==='Top'?'cardTitle':'cardTitleBelow');
-  const face  = document.getElementById(elPrefix==='Top'?'cardFace':'cardFaceBelow');
-  const art   = document.getElementById('card'+elPrefix);
-  if(!cardObj){ art.style.display='none'; face.textContent=''; return; }
-  art.style.display='flex';
-  const isBack = showBack;
-  const label = isBack ? 'Reverso' : 'Frente';
-  badge.textContent = label;
-  title.textContent = label;
-  face.textContent  = isBack ? cardObj.back : cardObj.front;
-  face.scrollTop = 0;
-}
-function renderStack(){
-  const stack = document.getElementById('stack'), help = document.getElementById('dzHelp');
-  const c = currentCard();
-  if(!c){ stack.style.display='none'; help.style.display='block'; return; }
-  help.style.display='none'; stack.style.display='block';
-  clearHint();
-  fillCard('Top', c, app.showBack);
-  const nextId = (app.freezeBelow && app.peekNextId) ? app.peekNextId : queueNextId();
-  const n = nextId ? cardById(nextId) : null;
-  const showBelowBack = (app.cfg.showStart==='back');
-  fillCard('Below', n, showBelowBack);
-}
-
-/* ========= Gestos con Pointer Events (tap flip; long-press no hace nada) ========= */
+/* ========= Gestos ========= */
 (function gestures(){
-  const el=document.getElementById('cardTop');
+  const el = document.getElementById('cardTop');
   let sx=0, sy=0, dx=0, dy=0, tracking=false, activePointer=null;
   const TAP_TH=18, COMMIT_TH=64, MAX_OPA_DIST=90;
 
-  const direction=(dx,dy)=> (Math.abs(dx)>Math.abs(dy)) ? (dx>0?'right':'left') : (dy>0?'down':'up');
+  const direction=(dx,dy)=>
+    (Math.abs(dx)>Math.abs(dy))
+      ? (dx>0?'right':'left')
+      : (dy>0?'down':'up');
 
-  function start(x,y, e){
+  function start(x,y,e){
     if(app.animating || tracking) return;
     e.preventDefault?.();
-    sx=x; sy=y; dx=0; dy=0; tracking=true; activePointer=e.pointerId ?? 'mouse';
-    app.peekNextId = queueNextId();
+    sx=x; sy=y; dx=0; dy=0;
+    tracking=true;
+    activePointer=e.pointerId ?? 'mouse';
+    app.peekNextEntry = queueNextEntry();
     app.freezeBelow = true;
     swapNoTransition(()=> renderStack());
     el.style.transition='';
     el.style.filter='';
     el.setPointerCapture?.(e.pointerId);
   }
-  function move(x,y, e){
+
+  function move(x,y,e){
     if(!tracking || app.animating) return;
     if(e && activePointer!=null && e.pointerId!==activePointer) return;
-    dx = x - sx; dy = y - sy;
+    dx = x - sx;
+    dy = y - sy;
+
     const rot = clamp(dx*0.06, -6, 6);
     el.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
 
@@ -473,141 +998,230 @@ function renderStack(){
     const bright = 1 + strong * 0.18;
     el.style.filter = `saturate(${sat}) brightness(${bright})`;
   }
-  function end(x,y, e){
+
+  function end(x,y,e){
     if(!tracking) return;
     if(e && activePointer!=null && e.pointerId!==activePointer) return;
-    tracking=false; activePointer=null;
-    const ddx = x - sx, ddy = y - sy;
+    tracking=false;
+    activePointer=null;
+
+    const ddx = x - sx;
+    const ddy = y - sy;
     const mag = Math.hypot(ddx,ddy);
-    clearHint(); el.style.filter='';
+    clearHint();
+    el.style.filter='';
     e?.preventDefault?.();
 
     if(mag < TAP_TH){
-      app.showBack = !app.showBack;
-      swapNoTransition(()=> renderStack());
-      el.style.transition='transform .14s ease'; el.style.transform='';
-      app.peekNextId = null; app.freezeBelow=false;
+      // Tap: voltear sólo la carta actual (mostrar solución)
+      const entry = currentEntry();
+      if(entry){
+        entry.showBack = !entry.showBack;
+        swapNoTransition(()=> renderStack());
+      }
+      el.style.transition='transform .14s ease';
+      el.style.transform='';
+      app.peekNextEntry = null;
+      app.freezeBelow = false;
       return;
     }
+
     const dir = direction(ddx,ddy);
     if(mag >= COMMIT_TH){
       gradeFromDir(dir, {dx:ddx, dy:ddy});
-    } else {
-      el.style.transition='transform .16s ease'; el.style.transform='';
-      app.peekNextId = null; app.freezeBelow=false;
-      clearHint(); el.style.filter='';
+    }else{
+      el.style.transition='transform .16s ease';
+      el.style.transform='';
+      app.peekNextEntry = null;
+      app.freezeBelow = false;
+      clearHint();
+      el.style.filter='';
     }
   }
 
-  el.addEventListener('pointerdown', e => start(e.clientX, e.clientY, e), {passive:false});
-  el.addEventListener('pointermove',  e => move(e.clientX,  e.clientY,  e), {passive:false});
-  el.addEventListener('pointerup',    e => end(e.clientX,   e.clientY,   e), {passive:false});
-  el.addEventListener('pointercancel', e=>{ tracking=false; activePointer=null; clearHint(); el.style.filter=''; });
+  el.addEventListener('pointerdown', e=>start(e.clientX,e.clientY,e), {passive:false});
+  el.addEventListener('pointermove',  e=>move(e.clientX, e.clientY, e), {passive:false});
+  el.addEventListener('pointerup',    e=>end(e.clientX,  e.clientY,  e), {passive:false});
+  el.addEventListener('pointercancel', ()=>{
+    tracking=false;
+    activePointer=null;
+    clearHint();
+    el.style.filter='';
+  });
 })();
 
-/* ========= Botones ========= */
+/* ========= Botones respuesta ========= */
 function freezeForButton(){
   if(app.animating) return;
-  app.peekNextId = queueNextId();
+  app.peekNextEntry = queueNextEntry();
   app.freezeBelow = true;
   swapNoTransition(()=> renderStack());
 }
 againBtn.onclick = ()=>{ freezeForButton(); gradeFromDir('left',  {dx:-80, dy:0}); };
-hardBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('down',  {dx:0, dy: 80}); };
-goodBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('up',    {dx:0, dy:-80}); };
-easyBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('right', {dx: 80, dy:0}); };
+hardBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('down',  {dx:0,  dy:80}); };
+goodBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('up',    {dx:0,  dy:-80}); };
+easyBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('right', {dx:80, dy:0}); };
 
 /* ========= Panel ajustes ========= */
-const bodyEl = document.body;
-openSettingsBtn.onclick = ()=> bodyEl.classList.add('sheet-open');
+openSettingsBtn.onclick  = ()=> bodyEl.classList.add('sheet-open');
 closeSettingsBtn.onclick = ()=> bodyEl.classList.remove('sheet-open');
 
-['againPos','hardPos','goodPos','easyPos','passesNeeded','orderSelect'].forEach(id=>{
-  document.getElementById(id).addEventListener('change', ()=>{
-    app.cfg.againPos = parseInt(againPos.value,10)||2;
-    app.cfg.hardPos  = parseInt(hardPos.value,10)||5;
-    const g = parseInt(goodPos.value,10);
-    app.cfg.goodPos  = isNaN(g) ? (goodPos.value||'end') : g;
-    app.cfg.easyPos  = (easyPos.value||'end');
-    app.cfg.passesNeeded = Math.max(1, parseInt(passesNeeded.value,10)||1);
-    app.cfg.order = orderSelect.value;
-    for(const id in app.meta){ const m=app.meta[id]; m.remaining = Math.max(1, app.cfg.passesNeeded - m.streak); }
-    renderAll(); saveSession();
-  });
-});
-
-/* ========= Import / Export (progreso completo) ========= */
-function sanitizeQueue(ids){
-  const valid = new Set(app.cards.map(c=>c.id));
-  return (ids||[]).filter(id=>valid.has(id));
-}
-function migrateAndSanitize(obj){
-  let out = {...app, ...obj};
-  out.version = 3;
-  out.cards = (out.cards||[]).map(c=>({id: c.id || uid(), front: c.front||'', back: c.back||''}));
-  const meta={}
-  for(const c of out.cards){
-    const m=(out.meta||{})[c.id]||{};
-    meta[c.id]={ seen: m.seen|0, streak: m.streak|0, correct: m.correct|0,
-                 remaining: Math.max(1, (out.cfg?.passesNeeded ?? app.cfg.passesNeeded) - (m.streak|0)) };
+function syncSettingsUIFromCfg(){
+  if(!againPos) return;
+  againPos.value = app.cfg.againPos;
+  hardPos.value  = app.cfg.hardPos;
+  goodPos.value  = app.cfg.goodPos;
+  easyPos.value  = app.cfg.easyPos;
+  passesNeeded.value = app.cfg.passesNeeded;
+  orderSelect.value  = app.cfg.order || 'shuffle';
+  if(guessSelect){
+    guessSelect.value = app.cfg.guessMode || 'back';
   }
-  out.meta=meta;
-  out.queue = sanitizeQueue(out.queue?.length ? out.queue : out.cards.map(c=>c.id));
-  if(!out.queue.length) out.queue = out.cards.map(c=>c.id);
-  if(!out.currentId || !out.queue.includes(out.currentId)) out.currentId = out.queue[0] || null;
-  out.cfg = {...app.cfg, ...(out.cfg||{})};
-  out.stats = {done: out.stats?.done|0, mastered: out.stats?.mastered|0};
-  out.showBack = !!out.showBack;
-  out.peekNextId=null; out.freezeBelow=false; out.animating=false;
-  return out;
 }
 
-function deckFromCSV(text){
-  const rows=parseCSV(text); if(!rows.length) throw new Error('CSV vacío');
-  const header=rows[0].map(h=>h.trim().toLowerCase());
-  const iF=header.indexOf('front'), iB=header.indexOf('back');
-  if(iF<0||iB<0) throw new Error('Cabeceras requeridas: Front,Back');
-  const cards=[]; for(let r=1;r<rows.length;r++){
-    const front=(rows[r][iF]??'').trim(), back=(rows[r][iB]??'').trim();
-    if(front||back) cards.push(makeCard(front,back));
-  }
-  if(!cards.length) throw new Error('No se encontraron tarjetas válidas.');
-  return cards;
+function applySettings(){
+  // Lectura segura de inputs
+  const a = parseInt(againPos.value,10);
+  const h = parseInt(hardPos.value,10);
+  const gRaw = (goodPos.value || '').trim();
+  const eRaw = (easyPos.value || '').trim();
+  const p = parseInt(passesNeeded.value,10);
+
+  app.cfg.againPos = (!isNaN(a) && a>=1) ? a : 2;
+  app.cfg.hardPos  = (!isNaN(h) && h>=1) ? h : 5;
+
+  const gNum = parseInt(gRaw,10);
+  app.cfg.goodPos = isNaN(gNum) ? (gRaw || 'end') : gNum;
+
+  const eNum = parseInt(eRaw,10);
+  app.cfg.easyPos = isNaN(eNum) ? (eRaw || 'end') : eNum;
+
+  app.cfg.passesNeeded = (!isNaN(p) && p>=1) ? p : 1;
+
+  const ord = orderSelect.value === 'original' ? 'original' : 'shuffle';
+  app.cfg.order = ord;
+
+  const gm = guessSelect.value;
+  app.cfg.guessMode = (gm === 'front' || gm === 'both') ? gm : 'back';
+
+  // Re-generar cola y progreso según nuevos ajustes
+  buildQueue();
+  renderAll();
+  saveSession();
 }
 
+applySettingsBtn.onclick = applySettings;
+
+/* ========= Import / Export ========= */
 async function importText(text, nameGuess='Baraja'){
+  const trimmed = text.trim();
+  if(!trimmed) return;
+
+  const sep = getSelectedSep();
+
+  // Intentar JSON primero
   try{
-    const obj=JSON.parse(text);
+    const obj = JSON.parse(trimmed);
+
     if(obj && (Array.isArray(obj.cards) || Array.isArray(obj.queue))){
-      const restored = migrateAndSanitize(obj);
+      // Sesión completa
+      let restored = migrateAndSanitize(obj);
       restored.deckName = obj.deckName || nameGuess;
       app = restored;
-      saveSession(); renderAll(); return;
+      syncSettingsUIFromCfg();
+      renderAll();
+      saveSession();
+      return;
     }
+
     if(Array.isArray(obj) && obj.length && (obj[0].front!==undefined || obj[0].Front!==undefined)){
+      // Array simple [{front,back}, ...]
       app.deckName = nameGuess;
-      app.cards = obj.map(o=>({id: uid(), front: o.front ?? o.Front ?? '', back: o.back ?? o.Back ?? ''}));
-      buildQueue(); saveSession(); renderAll(); return;
+      app.cards = obj.map(o=>({
+        id: uid(),
+        front: o.front ?? o.Front ?? '',
+        back:  o.back  ?? o.Back  ?? ''
+      }));
+      buildQueue();
+      renderAll();
+      saveSession();
+      return;
     }
+
+    // Si no encaja, dejar que caiga a CSV
     throw new Error('JSON no reconocido');
   }catch(_){
-    const cards = deckFromCSV(text);
-    app.deckName = nameGuess; app.cards = cards; buildQueue(); saveSession(); renderAll();
+    // CSV (con o sin cabecera; 1ª col → frente, 2ª col → reverso)
+    const rows = parseCSV(trimmed, sep);
+    if(!rows.length) { alert('CSV vacío.'); return; }
+
+    const clean = rows.filter(r => r.some(c => (c||'').trim() !== ''));
+    if(!clean.length){ alert('CSV vacío.'); return; }
+
+    const header = clean[0].map(h => h.trim().toLowerCase());
+    const hasFront = header.includes('front');
+    const hasBack  = header.includes('back');
+    const hasHeader = hasFront && hasBack;
+
+    let iF, iB, startRow;
+    if(hasHeader){
+      iF = header.indexOf('front');
+      iB = header.indexOf('back');
+      startRow = 1;
+    }else{
+      iF = 0;
+      iB = clean[0].length > 1 ? 1 : 0;
+      startRow = 0;
+    }
+
+    const cards=[];
+    for(let r=startRow; r<clean.length; r++){
+      const row = clean[r];
+      const front = (row[iF] ?? '').trim();
+      const back  = (row[iB] ?? '').trim();
+      if(front || back){
+        cards.push({id:uid(), front, back});
+      }
+    }
+
+    if(!cards.length){
+      alert('No se encontraron tarjetas válidas.');
+      return;
+    }
+
+    app.deckName = nameGuess;
+    app.cards = cards;
+    buildQueue();
+    renderAll();
+    saveSession();
   }
 }
 
-file.addEventListener('change', async (e)=>{
-  const f=e.target.files[0]; if(!f) return;
-  const txt=await f.text(); await importText(txt, f.name.replace(/\.(csv|txt|json)$/i,''));
-  e.target.value='';
+/* Fichero */
+fileInput.addEventListener('change', async (e)=>{
+  const f = e.target.files[0];
+  if(!f) return;
+  const txt = await f.text();
+  await importText(txt, f.name.replace(/\.(csv|txt|json)$/i,''));
+  e.target.value = '';
 });
+
+/* Pegado desde textarea */
 loadPasteBtn.addEventListener('click', ()=>{
-  const txt=pasteArea.value; if(!txt.trim()) return alert('Pega contenido primero.');
+  const txt = pasteArea.value;
+  if(!txt.trim()){
+    alert('Pega contenido primero.');
+    return;
+  }
   importText(txt, 'Pegado ' + new Date().toLocaleString());
 });
 
-// Exporta PROGRESO completo
+/* Exportar progreso completo */
 exportBtn.addEventListener('click', ()=>{
+  if(!app.cards.length){
+    alert('No hay nada que exportar.');
+    return;
+  }
   const payload = {
     version: app.version,
     deckName: app.deckName,
@@ -616,32 +1230,88 @@ exportBtn.addEventListener('click', ()=>{
     stats: app.stats,
     cards: app.cards,
     meta: app.meta,
-    queue: app.queue,
-    currentId: app.currentId,
-    showBack: app.showBack
+    queue: app.queue
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
-  const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: (app.deckName || 'baraja') + '.anki-cram.json'});
-  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (app.deckName || 'baraja') + '.anki-cram.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
 });
 
-/* ========= Reset ========= */
+/* ========= Reset / Wipe ========= */
+/* 🔙: reset sólo progreso, mantiene cartas y ajustes */
 resetBtn.onclick = ()=>{
-  if(confirm('¿Resetear sesión (estadísticas y cola)?')){ buildQueue(); renderAll(); saveSession(); }
+  if(!app.cards.length){
+    alert('No hay baraja cargada.');
+    return;
+  }
+  if(confirm('¿Resetear sólo el progreso de esta baraja (estadísticas y cola)?')){
+    buildQueue();
+    renderAll();
+    saveSession();
+  }
 };
 
-/* ========= Extra ========= */
+/* 🗑️: borrar TODO (cartas + progreso) */
+wipeAllBtn.onclick = ()=>{
+  if(confirm('Esto eliminará TODAS las cartas y el progreso guardado.\n\n¿Seguro que quieres continuar?')){
+    app = {
+      version: 3,
+      deckName:'Sin baraja',
+      cards:[],
+      queue:[],
+      stats:{done:0, mastered:0},
+      cfg:{
+        againPos:2,
+        hardPos:5,
+        goodPos:10,
+        easyPos:'end',
+        passesNeeded:1,
+        order:'shuffle',
+        guessMode:'back'
+      },
+      meta:{},
+      peekNextEntry:null,
+      freezeBelow:false,
+      animating:false
+    };
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+    syncSettingsUIFromCfg();
+    renderAll();
+  }
+};
+
+/* ========= Extra: Rebarajar desde ajustes ========= */
 reshuffleBtn.addEventListener('click', ()=>{
-  const cur=currentCard(); shuffle(app.queue);
-  if(cur){ const i=app.queue.indexOf(cur.id); if(i>0){ app.queue.splice(i,1); app.queue.unshift(cur.id); } }
-  renderAll(); saveSession();
-});
-flipStartBtn.addEventListener('click', ()=>{
-  app.cfg.showStart = (app.cfg.showStart==='front'?'back':'front'); saveSession();
+  if(!app.queue.length){
+    alert('No hay cartas para rebarajar.');
+    return;
+  }
+  const cur = currentEntry();
+  shuffle(app.queue);
+  // Mantener la carta actual delante si existe
+  if(cur){
+    const idx = app.queue.findIndex(e => e.id===cur.id && e.showBack===cur.showBack);
+    if(idx > 0){
+      const [entry] = app.queue.splice(idx,1);
+      app.queue.unshift(entry);
+    }
+  }
+  renderAll();
+  saveSession();
 });
 
 /* ========= Init ========= */
-(function init(){ if(!loadSession()){ renderAll(); } })();
+(function init(){
+  if(!loadSession()){
+    syncSettingsUIFromCfg();
+    renderAll();
+  }
+})();
 </script>
 </body>
 </html>
