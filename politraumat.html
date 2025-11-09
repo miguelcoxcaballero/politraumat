@@ -74,6 +74,7 @@
 
   .spacer{flex:1 1 auto; min-width:0}
   input[type=file]{display:none}
+
   .btn{
     border:1px solid #2a3a4f;
     background:var(--btn);
@@ -100,7 +101,6 @@
   .btn:active{transform:translateY(1px)}
   .btn.danger{border-color:#5b1a1a}
 
-  /* Aún más compacto en pantallas muy estrechas */
   @media (max-width:480px){
     header.topbar{
       gap:.25rem;
@@ -188,7 +188,7 @@
     display:flex;
     flex-direction:column;
     overflow:hidden;
-    transition: transform .22s ease, opacity .22s ease;
+    transition: transform .22s ease, opacity .22s ease, box-shadow .18s ease;
     will-change: transform, opacity;
   }
   .cardBelow{
@@ -227,6 +227,54 @@
     border-radius:8px;
   }
 
+  /* Modo completa */
+  .prompt-label{
+    font-size:.8rem;
+    color:#9cb2c9;
+    margin-bottom:.25rem;
+  }
+  .prompt-text{
+    font-size: var(--card-fs);
+    margin-bottom:.5rem;
+  }
+  .answer-area{
+    margin-top:.25rem;
+  }
+  .answer-input{
+    width:100%;
+    padding:.55rem .7rem;
+    border-radius:10px;
+    border:1px solid #263447;
+    background:#050811;
+    color:#e8ecf1;
+    font-size:1rem;
+    outline:none;
+    opacity:0;
+    animation:fadeInAnswer .5s forwards;
+  }
+  .solution{
+    margin-top:.45rem;
+    font-size:.9rem;
+    color:#9cb2c9;
+    white-space:pre-wrap;
+  }
+  @keyframes fadeInAnswer{
+    to{opacity:1;}
+  }
+
+  .card.result-easy{
+    box-shadow:0 0 0 2px rgba(37,99,235,.9), var(--shadow);
+  }
+  .card.result-good{
+    box-shadow:0 0 0 2px rgba(16,185,129,.9), var(--shadow);
+  }
+  .card.result-hard{
+    box-shadow:0 0 0 2px rgba(245,158,11,.9), var(--shadow);
+  }
+  .card.result-again{
+    box-shadow:0 0 0 2px rgba(239,68,68,.9), var(--shadow);
+  }
+
   .swipe-hint{
     position:absolute;
     inset:0;
@@ -256,7 +304,7 @@
   .hint-down {background:linear-gradient(0deg,   rgba(245,158,11,.65), transparent)}
 
   .exit-left { transform: translateX(-130%) rotate(-6deg); opacity:0 }
-  .exit-right{ transform: translateX(130%)  rotate( 6deg); opacity:0 }
+  .exit-right{ transform: translateX(130%) rotate( 6deg); opacity:0 }
   .exit-up   { transform: translateY(-130%) rotate(-3deg); opacity:0 }
   .exit-down { transform: translateY(130%) rotate( 3deg); opacity:0 }
   .notrans   { transition:none !important }
@@ -274,6 +322,12 @@
   .rowBtns{
     display:grid;
     grid-template-columns:repeat(4, 1fr);
+    gap:.6rem;
+  }
+  .rowCenter{
+    display:flex;
+    justify-content:center;
+    align-items:center;
     gap:.6rem;
   }
   .tbtn{
@@ -379,7 +433,7 @@
     <div class="dropzone" id="dzHelp">
       <b>Usa “📥” para cargar tu baraja (CSV o JSON).</b>
       <div>Si no hay cabecera Front,Back, se usa 1ª columna como Frente y 2ª como Reverso.</div>
-      <div>Elige el separador y el modo de “adivinar” en Ajustes.</div>
+      <div>Elige el separador, el modo de “adivinar” y el modo “cartas/completa” en Ajustes.</div>
     </div>
   </section>
 
@@ -402,6 +456,12 @@
         <select id="orderSelect" class="btn" style="width:100%">
           <option value="shuffle">Aleatorio</option>
           <option value="original">Original</option>
+        </select>
+      </label>
+      <label>Modo
+        <select id="modeSelect" class="btn" style="width:100%">
+          <option value="cartas">cartas</option>
+          <option value="completa">completa</option>
         </select>
       </label>
     </div>
@@ -446,16 +506,28 @@
 </main>
 
 <nav class="toolbar" id="toolbar">
-  <div class="rowBtns" id="rowBtns">
-    <button class="tbtn again" id="againBtn" aria-label="Again">Again</button>
-    <button class="tbtn hard"  id="hardBtn"  aria-label="Hard">Hard</button>
-    <button class="tbtn good"  id="goodBtn"  aria-label="Good">Good</button>
-    <button class="tbtn easy"  id="easyBtn"  aria-label="Easy">Easy</button>
+  <!-- MODO CARTAS -->
+  <div id="modeCardsControls">
+    <div class="rowBtns">
+      <button class="tbtn again" id="againBtn" aria-label="Again">Again</button>
+      <button class="tbtn hard"  id="hardBtn"  aria-label="Hard">Hard</button>
+      <button class="tbtn good"  id="goodBtn"  aria-label="Good">Good</button>
+      <button class="tbtn easy"  id="easyBtn"  aria-label="Easy">Easy</button>
+    </div>
+    <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy — Toca la carta para voltear.</div>
   </div>
-  <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy — Toca la carta para voltear.</div>
+
+  <!-- MODO COMPLETA (botón centrado dinámico) -->
+  <div id="modeCompleteControls" style="display:none">
+    <div class="rowCenter" id="completeButtonsContainer">
+      <button class="tbtn good" id="checkBtn" aria-label="Comprobar">Comprobar</button>
+    </div>
+    <div class="tiny" id="completeHint">Escribe tu respuesta y pulsa “Comprobar”.</div>
+  </div>
 </nav>
 
 <script>
+/* ========= Utilidades ========= */
 const uid = ()=> Math.random().toString(36).slice(2)+Date.now().toString(36);
 
 function parseCSV(text, sep){
@@ -493,7 +565,20 @@ function shuffle(arr){
   return arr;
 }
 const clamp=(v,min,max)=> Math.max(min, Math.min(max, v));
+function escapeHtml(str){
+  return (str||'').replace(/[&<>"']/g, c=>(
+    c==='&'?'&amp;':
+    c==='<'?'&lt;':
+    c==='>'?'&gt;':
+    c==='"'?'&quot;':
+    '&#39;'
+  ));
+}
+function normalizeAnswer(s){
+  return (s||'').trim().replace(/\s+/g,' ').toLowerCase();
+}
 
+/* ========= DOM ========= */
 const remStat        = document.getElementById('remStat');
 const doneStat       = document.getElementById('doneStat');
 const masteredStat   = document.getElementById('masteredStat');
@@ -502,6 +587,11 @@ const againBtn       = document.getElementById('againBtn');
 const hardBtn        = document.getElementById('hardBtn');
 const goodBtn        = document.getElementById('goodBtn');
 const easyBtn        = document.getElementById('easyBtn');
+
+const modeCardsControls    = document.getElementById('modeCardsControls');
+const modeCompleteControls = document.getElementById('modeCompleteControls');
+const completeButtonsContainer = document.getElementById('completeButtonsContainer');
+const completeHint   = document.getElementById('completeHint');
 
 const openSettingsBtn  = document.getElementById('openSettingsBtn');
 const closeSettingsBtn = document.getElementById('closeSettingsBtn');
@@ -512,6 +602,7 @@ const goodPos       = document.getElementById('goodPos');
 const easyPos       = document.getElementById('easyPos');
 const passesNeeded  = document.getElementById('passesNeeded');
 const orderSelect   = document.getElementById('orderSelect');
+const modeSelect    = document.getElementById('modeSelect');
 const guessSelect   = document.getElementById('guessSelect');
 const sepSelect     = document.getElementById('sepSelect');
 
@@ -526,18 +617,16 @@ const resetBtn      = document.getElementById('resetBtn');
 const wipeAllBtn    = document.getElementById('wipeAllBtn');
 
 const bodyEl        = document.body;
+const hintEl        = ()=> document.getElementById('swHint');
 
-function getSelectedSep(){
-  return (sepSelect && sepSelect.value) ? sepSelect.value : ',';
-}
-
-/* ===== Estado ===== */
+/* ========= Estado ========= */
 const STORAGE_KEY='ankiCram.mobile.v15.progress';
 let app={
   version: 3,
   deckName:'Sin baraja',
   cards:[],
-  queue:[], // [{id, showBack}]
+  // queue: [{id, showBack}]
+  queue:[],
   stats:{done:0, mastered:0},
   cfg:{
     againPos:2,
@@ -546,14 +635,20 @@ let app={
     easyPos:'end',
     passesNeeded:1,
     order:'shuffle',
-    guessMode:'back'
+    guessMode:'back',   // 'back','front','both'
+    mode:'cartas'       // 'cartas','completa'
   },
   meta:{},
   peekNextEntry:null,
   freezeBelow:false,
-  animating:false
+  animating:false,
+  completeState:'idle' // 'idle','checked-correct','checked-wrong'
 };
 
+/* ========= Helpers ========= */
+function getSelectedSep(){
+  return (sepSelect && sepSelect.value) ? sepSelect.value : ',';
+}
 function cardById(id){
   return app.cards.find(c=>c.id===id) || null;
 }
@@ -564,7 +659,7 @@ function currentCard(){
   return e ? cardById(e.id) : null;
 }
 
-/* ===== Migración / Persistencia ===== */
+/* ========= Migración / Persistencia ========= */
 function makeEntryForId(id, cfg){
   if(cfg.guessMode === 'front') return {id, showBack:true};
   if(cfg.guessMode === 'back')  return {id, showBack:false};
@@ -630,6 +725,9 @@ function migrateAndSanitize(obj){
   if(out.cfg.order !== 'original' && out.cfg.order !== 'shuffle'){
     out.cfg.order = 'shuffle';
   }
+  if(out.cfg.mode !== 'completa' && out.cfg.mode !== 'cartas'){
+    out.cfg.mode = 'cartas';
+  }
 
   const meta={};
   for(const c of out.cards){
@@ -645,7 +743,6 @@ function migrateAndSanitize(obj){
   out.meta = meta;
 
   out.queue = sanitizeQueue(out.queue, out.cfg, out.cards);
-
   out.stats = {
     done: out.stats?.done|0,
     mastered: out.stats?.mastered|0
@@ -654,6 +751,7 @@ function migrateAndSanitize(obj){
   out.peekNextEntry=null;
   out.freezeBelow=false;
   out.animating=false;
+  out.completeState='idle';
 
   return out;
 }
@@ -670,6 +768,7 @@ function loadSession(){
     if(!data) return false;
     app = migrateAndSanitize(data);
     syncSettingsUIFromCfg();
+    updateToolbarForMode();
     renderAll();
     return true;
   }catch(e){
@@ -677,9 +776,9 @@ function loadSession(){
   }
 }
 
-/* ===== Cola según ajustes ===== */
+/* ========= Cola según ajustes ========= */
 function buildQueue(){
-  const mode = app.cfg.guessMode || 'back';
+  const modeGuess = app.cfg.guessMode || 'back';
   const q = [];
 
   if(!app.cards.length){
@@ -689,15 +788,16 @@ function buildQueue(){
     app.peekNextEntry = null;
     app.freezeBelow = false;
     app.animating = false;
+    app.completeState = 'idle';
     return;
   }
 
-  if(mode === 'both'){
+  if(modeGuess === 'both'){
     for(const c of app.cards){
       q.push({id:c.id, showBack:false});
       q.push({id:c.id, showBack:true});
     }
-  }else if(mode === 'front'){
+  }else if(modeGuess === 'front'){
     for(const c of app.cards) q.push({id:c.id, showBack:true});
   }else{
     for(const c of app.cards) q.push({id:c.id, showBack:false});
@@ -714,13 +814,64 @@ function buildQueue(){
   app.peekNextEntry = null;
   app.freezeBelow = false;
   app.animating = false;
+  app.completeState = 'idle';
 }
 
-/* ===== Render ===== */
+/* ========= Toolbar según modo ========= */
+function showCheckButton(){
+  if(!completeButtonsContainer) return;
+  completeButtonsContainer.innerHTML =
+    '<button class="tbtn good" id="checkBtn" aria-label="Comprobar">Comprobar</button>';
+  const btn = document.getElementById('checkBtn');
+  if(btn) btn.onclick = handleCheck;
+  if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”.';
+}
+function showNextButton(){
+  if(!completeButtonsContainer) return;
+  completeButtonsContainer.innerHTML =
+    '<button class="tbtn easy" id="nextBtn" aria-label="Siguiente">Siguiente</button>';
+  const btn = document.getElementById('nextBtn');
+  if(btn) btn.onclick = handleNextEasy;
+  if(completeHint) completeHint.textContent = 'Correcto. Pulsa “Siguiente” para continuar.';
+}
+function showGradeButtons(){
+  if(!completeButtonsContainer) return;
+  completeButtonsContainer.innerHTML = `
+    <button class="tbtn again" id="againCompBtn" aria-label="Again">Again</button>
+    <button class="tbtn hard"  id="hardCompBtn"  aria-label="Hard">Hard</button>
+    <button class="tbtn good"  id="goodCompBtn"  aria-label="Good">Good</button>
+  `;
+  const again = document.getElementById('againCompBtn');
+  const hard  = document.getElementById('hardCompBtn');
+  const good  = document.getElementById('goodCompBtn');
+  if(again) again.onclick = ()=>handleCompleteGrade('again');
+  if(hard)  hard.onclick  = ()=>handleCompleteGrade('hard');
+  if(good)  good.onclick  = ()=>handleCompleteGrade('good');
+  if(completeHint) completeHint.textContent = 'Respuesta incorrecta. Elige una opción para continuar.';
+}
+
+function updateToolbarForMode(){
+  if(app.cfg.mode === 'completa'){
+    modeCardsControls.style.display='none';
+    modeCompleteControls.style.display='block';
+    app.completeState = 'idle';
+    showCheckButton();
+  }else{
+    modeCardsControls.style.display='block';
+    modeCompleteControls.style.display='none';
+    app.completeState = 'idle';
+  }
+}
+
+/* ========= Render ========= */
 function renderStats(){
   remStat.textContent = String(app.queue.length);
   doneStat.textContent = String(app.stats.done||0);
   masteredStat.textContent = String(app.stats.mastered||0);
+}
+function clearResultClasses(){
+  const top = document.getElementById('cardTop');
+  top.classList.remove('result-easy','result-good','result-hard','result-again');
 }
 
 function fillCard(prefix, cardObj, showBack){
@@ -759,13 +910,57 @@ function renderStack(){
   stack.style.display='block';
 
   clearHint();
+  clearResultClasses();
 
-  fillCard('Top', card, entry.showBack);
+  const belowArt = document.getElementById('cardBelow');
 
-  let nextEntry = (app.freezeBelow && app.peekNextEntry) ? app.peekNextEntry : queueNextEntry();
-  if(nextEntry && !cardById(nextEntry.id)) nextEntry = null;
-  const nextCard = nextEntry ? cardById(nextEntry.id) : null;
-  fillCard('Below', nextCard, nextEntry ? nextEntry.showBack : false);
+  if(app.cfg.mode === 'completa'){
+    // Reiniciar estado para nueva carta
+    app.completeState = 'idle';
+    if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”.';
+    showCheckButton();
+
+    const face = document.getElementById('cardFace');
+    const badge = document.getElementById('sideBadge');
+    const title = document.getElementById('cardTitle');
+    const showBack = !!entry.showBack;
+
+    const promptLabel = showBack ? 'Escribe el frente correcto:' : 'Escribe el reverso correcto:';
+    const promptText  = showBack ? (card.back || '') : (card.front || '');
+    const solutionSide= showBack ? (card.front || '') : (card.back || '');
+
+    const visibleLabel = showBack ? 'Reverso' : 'Frente';
+    badge.textContent = visibleLabel;
+    title.textContent = visibleLabel;
+
+    face.innerHTML = `
+      <div class="prompt-label">${promptLabel}</div>
+      <div class="prompt-text">${escapeHtml(promptText)}</div>
+      <div class="answer-area">
+        <input id="answerInput" class="answer-input" autocomplete="off" />
+      </div>
+      <div class="solution" id="solutionArea"></div>
+    `;
+    face.scrollTop = 0;
+
+    belowArt.style.display='none';
+    document.getElementById('cardFaceBelow').textContent='';
+
+    const topCard = document.getElementById('cardTop');
+    topCard.dataset.solution = solutionSide;
+
+    setTimeout(()=>{
+      const inp = document.getElementById('answerInput');
+      if(inp) inp.focus();
+    }, 50);
+
+  } else {
+    // Modo cartas clásico
+    fillCard('Top', card, entry.showBack);
+    const nextEntry = (app.freezeBelow && app.peekNextEntry) ? app.peekNextEntry : queueNextEntry();
+    const nextCard  = nextEntry ? cardById(nextEntry.id) : null;
+    fillCard('Below', nextCard, nextEntry ? nextEntry.showBack : false);
+  }
 }
 
 function renderAll(){
@@ -773,9 +968,7 @@ function renderAll(){
   renderStack();
 }
 
-/* ===== Hint ===== */
-const hintEl = ()=> document.getElementById('swHint');
-
+/* ========= Hint ========= */
 function setHintDirOpacity(dir, opa){
   const h = hintEl();
   h.classList.remove('flash');
@@ -811,7 +1004,7 @@ function flashHintFinal(dir){
   setTimeout(clearHint, 520);
 }
 
-/* ===== Cola movimiento ===== */
+/* ========= Movimiento cola ========= */
 function moveCurrent(delta){
   if(app.queue.length <= 1) return;
   const entry = app.queue.shift();
@@ -827,7 +1020,7 @@ function removeCurrentAsMastered(){
   app.stats.mastered += 1;
 }
 
-/* ===== Grading ===== */
+/* ========= Grading ========= */
 function performGrade(action){
   const entry = currentEntry();
   const card = currentCard();
@@ -866,7 +1059,7 @@ function performGrade(action){
   }
 }
 
-/* ===== Animaciones ===== */
+/* ========= Animaciones ========= */
 function applyExit(action, dragState, done){
   const el = document.getElementById('cardTop');
   const {dx=0, dy=0} = dragState || {};
@@ -944,6 +1137,7 @@ function gradeFromDir(dir, currentDrag){
     app.peekNextEntry = null;
     app.freezeBelow = false;
     app.animating = false;
+    app.completeState = 'idle';
 
     swapNoTransition(()=>{
       clearHint();
@@ -953,7 +1147,7 @@ function gradeFromDir(dir, currentDrag){
   });
 }
 
-/* ===== Gestos ===== */
+/* ========= Gestos (solo modo cartas) ========= */
 (function gestures(){
   const el = document.getElementById('cardTop');
   let sx=0, sy=0, dx=0, dy=0, tracking=false, activePointer=null;
@@ -965,6 +1159,7 @@ function gradeFromDir(dir, currentDrag){
       : (dy>0?'down':'up');
 
   function start(x,y,e){
+    if(app.cfg.mode !== 'cartas') return;
     if(app.animating || tracking) return;
     e.preventDefault?.();
     sx=x; sy=y; dx=0; dy=0;
@@ -979,6 +1174,7 @@ function gradeFromDir(dir, currentDrag){
   }
 
   function move(x,y,e){
+    if(app.cfg.mode !== 'cartas') return;
     if(!tracking || app.animating) return;
     if(e && activePointer!=null && e.pointerId!==activePointer) return;
     dx = x - sx;
@@ -999,6 +1195,7 @@ function gradeFromDir(dir, currentDrag){
   }
 
   function end(x,y,e){
+    if(app.cfg.mode !== 'cartas') return;
     if(!tracking) return;
     if(e && activePointer!=null && e.pointerId!==activePointer) return;
     tracking=false;
@@ -1048,9 +1245,9 @@ function gradeFromDir(dir, currentDrag){
   });
 })();
 
-/* ===== Botones respuesta ===== */
+/* ========= Botones modo cartas ========= */
 function freezeForButton(){
-  if(app.animating) return;
+  if(app.animating || app.cfg.mode !== 'cartas') return;
   app.peekNextEntry = queueNextEntry();
   app.freezeBelow = true;
   swapNoTransition(()=> renderStack());
@@ -1060,18 +1257,97 @@ hardBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('down',  {dx:0,  dy:80}
 goodBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('up',    {dx:0,  dy:-80}); };
 easyBtn.onclick  = ()=>{ freezeForButton(); gradeFromDir('right', {dx:80, dy:0}); };
 
-/* ===== Ajustes (sheet) ===== */
+/* ========= Modo completa: comprobar / siguiente / again-hard-good ========= */
+function setCardResultClass(kind){
+  const el = document.getElementById('cardTop');
+  el.classList.remove('result-easy','result-good','result-hard','result-again');
+  if(kind==='easy') el.classList.add('result-easy');
+  else if(kind==='good') el.classList.add('result-good');
+  else if(kind==='hard') el.classList.add('result-hard');
+  else if(kind==='again') el.classList.add('result-again');
+}
+
+function handleCheck(){
+  if(app.cfg.mode !== 'completa' || app.animating) return;
+  if(app.completeState !== 'idle') return;
+
+  const entry = currentEntry();
+  const card = currentCard();
+  if(!entry || !card) return;
+
+  const inputEl = document.getElementById('answerInput');
+  const solutionArea = document.getElementById('solutionArea');
+  if(!inputEl || !solutionArea) return;
+
+  const user = normalizeAnswer(inputEl.value);
+  const expectedRaw = entry.showBack ? (card.front || '') : (card.back || '');
+  const expected = normalizeAnswer(expectedRaw);
+
+  // Siempre mostramos la solución antes de decidir siguiente
+  solutionArea.textContent = 'Solución: ' + expectedRaw;
+
+  if(user && expected && user === expected){
+    // Correcto: marcar EASY, mostrar botón "Siguiente"
+    app.completeState = 'checked-correct';
+    setCardResultClass('easy');
+    showNextButton();
+  }else{
+    // Incorrecto: mostrar opciones Again/Hard/Good centradas
+    app.completeState = 'checked-wrong';
+    clearResultClasses(); // color se aplicará según elección
+    showGradeButtons();
+  }
+}
+
+function handleNextEasy(){
+  if(app.cfg.mode !== 'completa' || app.animating) return;
+  if(app.completeState !== 'checked-correct') return;
+  if(!currentEntry()) return;
+
+  // Ya está marcado como easy (color). Avanzamos con animación EASY.
+  app.completeState = 'idle';
+  gradeFromDir('right', {dx:80, dy:0});
+}
+
+function handleCompleteGrade(action){
+  if(app.cfg.mode !== 'completa' || app.animating) return;
+  if(app.completeState !== 'checked-wrong') return;
+  if(!currentEntry()) return;
+
+  // Colorear antes de pasar
+  if(action==='again') setCardResultClass('again');
+  else if(action==='hard') setCardResultClass('hard');
+  else if(action==='good') setCardResultClass('good');
+
+  app.completeState = 'idle';
+
+  const dir =
+    action==='again' ? 'left' :
+    action==='hard'  ? 'down' :
+                       'up';
+
+  const drag =
+    dir==='left' ? {dx:-80, dy:0} :
+    dir==='right'? {dx:80,  dy:0} :
+    dir==='up'   ? {dx:0,   dy:-80} :
+                   {dx:0,   dy:80};
+
+  gradeFromDir(dir, drag);
+}
+
+/* ========= Panel ajustes ========= */
 openSettingsBtn.onclick  = ()=> bodyEl.classList.add('sheet-open');
 closeSettingsBtn.onclick = ()=> bodyEl.classList.remove('sheet-open');
 
 function syncSettingsUIFromCfg(){
-  againPos.value = app.cfg.againPos;
-  hardPos.value  = app.cfg.hardPos;
-  goodPos.value  = app.cfg.goodPos;
-  easyPos.value  = app.cfg.easyPos;
-  passesNeeded.value = app.cfg.passesNeeded;
-  orderSelect.value  = app.cfg.order || 'shuffle';
-  guessSelect.value  = app.cfg.guessMode || 'back';
+  againPos.value      = app.cfg.againPos;
+  hardPos.value       = app.cfg.hardPos;
+  goodPos.value       = app.cfg.goodPos;
+  easyPos.value       = app.cfg.easyPos;
+  passesNeeded.value  = app.cfg.passesNeeded;
+  orderSelect.value   = app.cfg.order || 'shuffle';
+  guessSelect.value   = app.cfg.guessMode || 'back';
+  modeSelect.value    = app.cfg.mode || 'cartas';
 }
 
 function applySettings(){
@@ -1097,14 +1373,17 @@ function applySettings(){
   const gm = guessSelect.value;
   app.cfg.guessMode = (gm === 'front' || gm === 'both') ? gm : 'back';
 
+  const modeVal = (modeSelect.value === 'completa') ? 'completa' : 'cartas';
+  app.cfg.mode = modeVal;
+
   buildQueue();
+  updateToolbarForMode();
   renderAll();
   saveSession();
 }
-
 applySettingsBtn.onclick = applySettings;
 
-/* ===== Import / Export ===== */
+/* ========= Import / Export ========= */
 async function importText(text, nameGuess='Baraja'){
   const trimmed = text.trim();
   if(!trimmed) return;
@@ -1118,6 +1397,7 @@ async function importText(text, nameGuess='Baraja'){
       restored.deckName = obj.deckName || nameGuess;
       app = restored;
       syncSettingsUIFromCfg();
+      updateToolbarForMode();
       renderAll();
       saveSession();
       return;
@@ -1131,6 +1411,7 @@ async function importText(text, nameGuess='Baraja'){
         back:  o.back  ?? o.Back  ?? ''
       }));
       buildQueue();
+      updateToolbarForMode();
       renderAll();
       saveSession();
       return;
@@ -1178,6 +1459,7 @@ async function importText(text, nameGuess='Baraja'){
     app.deckName = nameGuess;
     app.cards = cards;
     buildQueue();
+    updateToolbarForMode();
     renderAll();
     saveSession();
   }
@@ -1225,7 +1507,7 @@ exportBtn.addEventListener('click', ()=>{
   setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
 });
 
-/* ===== Reset / Wipe ===== */
+/* ========= Reset / Wipe ========= */
 resetBtn.onclick = ()=>{
   if(!app.cards.length){
     alert('No hay baraja cargada.');
@@ -1233,6 +1515,7 @@ resetBtn.onclick = ()=>{
   }
   if(confirm('¿Resetear sólo el progreso de esta baraja (estadísticas y cola)?')){
     buildQueue();
+    updateToolbarForMode();
     renderAll();
     saveSession();
   }
@@ -1253,20 +1536,23 @@ wipeAllBtn.onclick = ()=>{
         easyPos:'end',
         passesNeeded:1,
         order:'shuffle',
-        guessMode:'back'
+        guessMode:'back',
+        mode:'cartas'
       },
       meta:{},
       peekNextEntry:null,
       freezeBelow:false,
-      animating:false
+      animating:false,
+      completeState:'idle'
     };
     try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
     syncSettingsUIFromCfg();
+    updateToolbarForMode();
     renderAll();
   }
 };
 
-/* ===== Rebarajar desde ajustes ===== */
+/* ========= Rebarajar ========= */
 reshuffleBtn.addEventListener('click', ()=>{
   if(!app.queue.length){
     alert('No hay cartas para rebarajar.');
@@ -1285,10 +1571,11 @@ reshuffleBtn.addEventListener('click', ()=>{
   saveSession();
 });
 
-/* ===== Init ===== */
+/* ========= Init ========= */
 (function init(){
   if(!loadSession()){
     syncSettingsUIFromCfg();
+    updateToolbarForMode();
     renderAll();
   }
 })();
