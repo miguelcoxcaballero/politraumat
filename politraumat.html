@@ -229,8 +229,8 @@
 
   /* ==== Ajustes visuales MODO COMPLETA (compacto + texto grande) ==== */
   .prompt-text{
-    font-size: clamp(20px, 4vw, 28px);  /* más grande */
-    margin: 0 0 0.25rem;                 /* pegado a la etiqueta */
+    font-size: clamp(20px, 4vw, 28px);
+    margin: 0 0 0.25rem;
     line-height: 1.25;
   }
   .prompt-label{
@@ -239,7 +239,7 @@
     margin: 0 0 0.25rem;
   }
   .answer-area{
-    margin: 0 0 0.2rem;                  /* casi sin hueco */
+    margin: 0 0 0.2rem;
   }
   .answer-input{
     width:100%;
@@ -254,7 +254,7 @@
     animation:fadeInAnswer .5s forwards;
   }
   .solution{
-    margin-top:.28rem;                   /* solución justo debajo */
+    margin-top:.28rem;
     font-size: clamp(15px, 2.8vw, 18px);
     color:#9cb2c9;
     white-space:pre-wrap;
@@ -575,7 +575,7 @@
       <button class="tbtn good"  id="goodBtn"  aria-label="Good">Good</button>
       <button class="tbtn easy"  id="easyBtn"  aria-label="Easy">Easy</button>
     </div>
-    <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy — Toca la carta para voltear.</div>
+    <div class="tiny">Gestos: ⬅ Again · ⬆ Good · ⬇ Hard · ➡ Easy — Toca la carta para voltear. Pulsa Enter para Again.</div>
   </div>
 
   <!-- MODO COMPLETA -->
@@ -583,7 +583,7 @@
     <div class="rowCenter" id="completeButtonsContainer">
       <button class="tbtn good wide" id="checkBtn" aria-label="Comprobar">Comprobar</button>
     </div>
-    <div class="tiny" id="completeHint">Escribe tu respuesta y pulsa “Comprobar”.</div>
+    <div class="tiny" id="completeHint">Escribe tu respuesta y pulsa “Comprobar”. También puedes pulsar Enter.</div>
   </div>
 </nav>
 
@@ -696,8 +696,8 @@ let app={
     easyPos:'end',
     passesNeeded:1,
     order:'shuffle',
-    guessMode:'back',   // 'back','front','both'
-    mode:'cartas'       // 'cartas','completa'
+    guessMode:'back',
+    mode:'cartas'
   },
   meta:{},
   peekNextEntry:null,
@@ -885,7 +885,7 @@ function showCheckButton(){
     '<button class="tbtn good wide" id="checkBtn" aria-label="Comprobar">Comprobar</button>';
   const btn = document.getElementById('checkBtn');
   if(btn) btn.onclick = handleCheck;
-  if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”.';
+  if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”. También puedes pulsar Enter.';
 }
 function showNextButton(){
   if(!completeButtonsContainer) return;
@@ -893,7 +893,7 @@ function showNextButton(){
     '<button class="tbtn easy wide" id="nextBtn" aria-label="Siguiente">Siguiente</button>';
   const btn = document.getElementById('nextBtn');
   if(btn) btn.onclick = handleNextEasy;
-  if(completeHint) completeHint.textContent = 'Correcto. Pulsa “Siguiente” para continuar.';
+  if(completeHint) completeHint.textContent = 'Correcto. Pulsa “Siguiente” o Enter para continuar.';
 }
 function showGradeButtons(){
   if(!completeButtonsContainer) return;
@@ -908,7 +908,7 @@ function showGradeButtons(){
   if(again) again.onclick = ()=>handleCompleteGrade('again');
   if(hard)  hard.onclick  = ()=>handleCompleteGrade('hard');
   if(good)  good.onclick  = ()=>handleCompleteGrade('good');
-  if(completeHint) completeHint.textContent = 'Respuesta incorrecta. Elige una opción para continuar.';
+  if(completeHint) completeHint.textContent = 'Respuesta incorrecta. Elige una opción o pulsa Enter para Again.';
 }
 
 function updateToolbarForMode(){
@@ -1013,7 +1013,7 @@ function renderStack(){
       if(inp) inp.focus();
     }, 50);
 
-    if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”.';
+    if(completeHint) completeHint.textContent = 'Escribe tu respuesta y pulsa “Comprobar”. También puedes pulsar Enter.';
 
   } else {
     fillCard('Top', card, entry.showBack);
@@ -1624,6 +1624,56 @@ reshuffleBtn.addEventListener('click', ()=>{
   }
   renderAll();
   saveSession();
+});
+
+/* ========= ENTER para continuar / Again por defecto ========= */
+/* Regla:
+   - Modo cartas (múltiples botones): Enter => Again.
+   - Modo completa:
+       * Estado 'idle' (hay "Comprobar"): Enter => Comprobar.
+       * Estado 'checked-correct' (hay "Siguiente"): Enter => Siguiente.
+       * Estado 'checked-wrong' (múltiples botones): Enter => Again.
+   - Si el foco está en Ajustes (inputs/textarea del panel), NO interceptar.
+   - Si el foco está en #answerInput, aplicar las reglas anteriores para completa. */
+function isInSettingsActive(){
+  const ae = document.activeElement;
+  if(!ae) return false;
+  return !!ae.closest('#settingsPanel');
+}
+document.addEventListener('keydown', (e)=>{
+  if(e.key !== 'Enter') return;
+
+  // Evitar interferir con ajustes
+  if(isInSettingsActive()) return;
+
+  const ae = document.activeElement;
+  const isTextArea = ae && (ae.tagName === 'TEXTAREA' || ae.isContentEditable);
+  // Permitimos Enter en #answerInput; lo bloqueamos en otros textareas/editables
+  if(isTextArea && ae.id !== 'answerInput') return;
+
+  // Evitar submit de input type="file" accidental, etc.
+  e.preventDefault();
+
+  if(app.cfg.mode === 'cartas'){
+    // Múltiples botones: Enter = Again
+    if(!app.animating && currentEntry()){
+      freezeForButton();
+      gradeFromDir('left', {dx:-80, dy:0});
+    }
+    return;
+  }
+
+  // Modo completa
+  if(app.completeState === 'idle'){
+    // Enter = Comprobar
+    handleCheck();
+  }else if(app.completeState === 'checked-correct'){
+    // Enter = Siguiente
+    handleNextEasy();
+  }else if(app.completeState === 'checked-wrong'){
+    // Múltiples botones: Enter = Again
+    handleCompleteGrade('again');
+  }
 });
 
 /* ========= Init ========= */
