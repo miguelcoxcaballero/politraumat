@@ -14,8 +14,8 @@
     --btn:#142033; --btnHover:#1b2b44; --radius:16px;
     --fw: clamp(15px, 2.7vw, 18px);
     --card-fs: clamp(16px, 3.6vw, 22px);
-    --head-fs: clamp(15px, 3.4vw, 20px);
-    --topbar-h: 60px;
+    --head-fs: clamp(17px, 3.8vw, 22px);
+    --topbar-h: 64px;
     --statsbar-h: 46px;
     --toolbar-h: 88px;
   }
@@ -37,8 +37,8 @@
     height:var(--topbar-h);
     display:flex;
     align-items:center;
-    gap:.4rem;
-    padding:0 .5rem;
+    gap:.5rem;
+    padding:0 .6rem;
     background:rgba(11,15,20,.9);
     backdrop-filter: blur(8px);
     border-bottom:1px solid #162234;
@@ -48,15 +48,15 @@
   .brand{
     display:flex;
     align-items:center;
-    gap:.22rem;
-    font-weight:700;
+    gap:.24rem;
+    font-weight:800;
     font-size:var(--head-fs);
     white-space:nowrap;
     flex:0 0 auto;
   }
-  .brand-poli{color:#fff; letter-spacing:.12px}
+  .brand-poli{color:#fff; letter-spacing:.14px}
   .brand-trauma{
-    font-weight:800;
+    font-weight:900;
     background: linear-gradient(90deg,#ff0040,#ff7a00,#ffd400,#00d17a,#0096ff,#9b5cff,#ff3cd1);
     background-size: 200% 100%;
     background-position: 0% 50%;
@@ -64,7 +64,7 @@
     background-clip:text;
     -webkit-text-fill-color: transparent;
     color:transparent;
-    letter-spacing:.18px;
+    letter-spacing:.2px;
     animation: rainbowSlide 6s linear infinite;
   }
   @keyframes rainbowSlide{
@@ -79,15 +79,15 @@
     border:1px solid #2a3a4f;
     background:var(--btn);
     color:var(--ink);
-    padding:.36rem .6rem;
+    padding:.42rem .7rem;
     border-radius:10px;
     cursor:pointer;
     transition:background .15s, transform .06s;
-    font-size: clamp(12px, 2.7vw, 14px);
+    font-size: clamp(13px, 3vw, 15px);
     line-height:1;
     white-space:nowrap;
     flex:0 0 auto;
-    max-width:72px;
+    max-width:80px;
     text-overflow:ellipsis;
     overflow:hidden;
   }
@@ -95,8 +95,7 @@
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    height:34px;
-    font-size:clamp(13px, 2.9vw, 15px);
+    height:38px;
   }
   .btn:hover{background:var(--btnHover)}
   .btn:active{transform:translateY(1px)}
@@ -104,20 +103,20 @@
 
   @media (max-width:480px){
     header.topbar{
-      gap:.3rem;
-      padding:0 .38rem;
+      gap:.35rem;
+      padding:0 .42rem;
     }
     .brand{
-      font-size:13px;
-      max-width:92px;
+      font-size:15px;
+      max-width:102px;
       text-overflow:ellipsis;
       overflow:hidden;
     }
     header.topbar .btn{
-      padding:.26rem .4rem;
-      font-size:11px;
-      max-width:60px;
-      height:30px;
+      padding:.3rem .46rem;
+      font-size:12px;
+      max-width:64px;
+      height:34px;
     }
   }
 
@@ -178,7 +177,7 @@
     position:absolute;
     inset:0;
     border-radius:14px;
-    padding:1.1rem 1.2rem;
+    padding:.9rem 1.0rem .9rem;
     user-select:none;
     touch-action:none;
     background:
@@ -199,23 +198,23 @@
   .badge{
     position:absolute;
     right:.8rem;
-    top:.8rem;
+    top:.46rem;
     font-size:.9rem;
     color:#b4c5d6;
     pointer-events:none;
   }
   .card h2{
-    margin:0 0 .5rem;
-    font-size: clamp(15px, 3.2vw, 20px);
+    margin:.1rem 0 .25rem;
+    font-size: clamp(16px, 3.4vw, 21px);
     color:#cfe3ff;
   }
 
   .face{
     white-space:pre-wrap;
     font-size: var(--card-fs);
-    line-height:1.5;
+    line-height:1.45;
     overflow:auto;
-    padding-bottom:1rem;
+    padding-bottom:.4rem;
     scrollbar-width: thin;
     text-shadow:none !important;
     background:transparent !important;
@@ -228,34 +227,35 @@
     border-radius:8px;
   }
 
-  /* Modo completa */
-  .prompt-label{
-    font-size:.8rem;
-    color:#9cb2c9;
-    margin-bottom:.25rem;
-  }
+  /* ==== Ajustes visuales MODO COMPLETA (compacto + texto grande) ==== */
   .prompt-text{
-    font-size: var(--card-fs);
-    margin-bottom:.5rem;
+    font-size: clamp(20px, 4vw, 28px);  /* más grande */
+    margin: 0 0 0.25rem;                 /* pegado a la etiqueta */
+    line-height: 1.25;
+  }
+  .prompt-label{
+    font-size: clamp(15px, 3vw, 18px);
+    color:#a7b6c7;
+    margin: 0 0 0.25rem;
   }
   .answer-area{
-    margin-top:.25rem;
+    margin: 0 0 0.2rem;                  /* casi sin hueco */
   }
   .answer-input{
     width:100%;
-    padding:.55rem .7rem;
+    padding:.45rem .6rem;
     border-radius:10px;
     border:1px solid #263447;
     background:#050811;
     color:#e8ecf1;
-    font-size:1rem;
+    font-size: clamp(16px, 3vw, 20px);
     outline:none;
     opacity:0;
     animation:fadeInAnswer .5s forwards;
   }
   .solution{
-    margin-top:.45rem;
-    font-size:.9rem;
+    margin-top:.28rem;                   /* solución justo debajo */
+    font-size: clamp(15px, 2.8vw, 18px);
     color:#9cb2c9;
     white-space:pre-wrap;
   }
@@ -263,6 +263,7 @@
     to{opacity:1;}
   }
 
+  /* Borde/perímetro según resultado */
   .card.result-easy{
     box-shadow:0 0 0 2px rgba(37,99,235,.9), var(--shadow);
   }
@@ -384,7 +385,6 @@
   }
   .sheet-title{font-weight:700}
 
-  /* Lista vertical de ajustes */
   .gridList{
     display:flex;
     flex-direction:column;
@@ -399,7 +399,6 @@
     color:#9cb2c9;
   }
 
-  /* Botones/campos en ajustes más grandes y anchos */
   .sheet-panel .btn{
     max-width:none;
     width:100%;
@@ -413,7 +412,7 @@
     text-align:left;
   }
 
-  /* EXCEPCIÓN: la X debe ser cuadrada arriba derecha */
+  /* X de cierre: cuadrada arriba derecha */
   #closeSettingsBtn{
     width:auto !important;
     max-width:none !important;
@@ -421,7 +420,7 @@
     height:32px !important;
     aspect-ratio:1/1;
     border-radius:8px;
-    font-size:16px !important;
+    font-size:18px !important;
     flex:0 0 auto;
   }
 
@@ -985,17 +984,17 @@ function renderStack(){
     const title = document.getElementById('cardTitle');
     const showBack = !!entry.showBack;
 
-    const promptLabel = showBack ? 'Escribe el frente correcto:' : 'Escribe el reverso correcto:';
     const promptText  = showBack ? (card.back || '') : (card.front || '');
-    const solutionSide= showBack ? (card.front || '') : (card.back || '');
+    const solutionRaw = showBack ? (card.front || '') : (card.back || '');
+    const promptLabel = showBack ? 'Escribe el frente correcto:' : 'Escribe el reverso correcto:';
 
     const visibleLabel = showBack ? 'Reverso' : 'Frente';
     badge.textContent = visibleLabel;
     title.textContent = visibleLabel;
 
     face.innerHTML = `
-      <div class="prompt-label">${promptLabel}</div>
       <div class="prompt-text">${escapeHtml(promptText)}</div>
+      <div class="prompt-label">${promptLabel}</div>
       <div class="answer-area">
         <input id="answerInput" class="answer-input" autocomplete="off" />
       </div>
@@ -1007,7 +1006,7 @@ function renderStack(){
     document.getElementById('cardFaceBelow').textContent='';
 
     const topCard = document.getElementById('cardTop');
-    topCard.dataset.solution = solutionSide;
+    topCard.dataset.solution = solutionRaw;
 
     setTimeout(()=>{
       const inp = document.getElementById('answerInput');
@@ -1348,11 +1347,11 @@ function handleCheck(){
 
   if(user && expected && user === expected){
     app.completeState = 'checked-correct';
-    setCardResultClass('easy');
+    setCardResultClass('easy');  // perímetro azul
     showNextButton();
   }else{
     app.completeState = 'checked-wrong';
-    setCardResultClass('again'); // rojo al fallar
+    setCardResultClass('again'); // perímetro rojo
     showGradeButtons();
   }
 }
